@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :user_subscriptions
-  get 'sessions/new'
-
+  get '/login', to: 'sessions#new'
+  get '/signup', to: 'users#new'
   resources :items
   resources :boxes
   resources :box_items
