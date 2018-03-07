@@ -1,19 +1,7 @@
 <fieldset>
 <% provide(:title, "Log in") %> <h1>Log in</h1>>
-<%= form_for(:session, url: login_path) do |f| %> 
-<%= f.label :first_name %>
-<%= f.text_field :first_name%> 
-<%= f.label :last_name %>
-<%= f.text_field :last_name%> 
-<%= f.label :email %>
-<%= f.email_field :email%> 
-<%= f.label :password %>
-<%= f.password_field :password %> 
-<%= f.submit "Log in"%>
-    <%= f.label :remember_me, class: do %> 
-    <%= f.check_box :remember_me %>
-    <span>Remember me on this computer</span>
-    <% end %>
-<% end %>
+    <div> 
+        <%= render 'form' %>
+    </div>
 <p>New user? <%= link_to "Sign up now!", signup_path %></p> </div>
 </fieldset>
