@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   resources :user_subscriptions
   get '/login', to: 'sessions#new'
   get '/signup', to: 'users#new'
@@ -7,5 +11,6 @@ Rails.application.routes.draw do
   resources :box_items
   resources :subscriptions
   resources :users
+  resources :password_resets,     only: [:new, :create, :edit, :update]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
