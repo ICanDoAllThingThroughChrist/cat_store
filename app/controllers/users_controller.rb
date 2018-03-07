@@ -16,12 +16,15 @@ class UsersController < ApplicationController
     def create 
         @user = User.new(user_params)
         if @user.save 
-            log_in @user 
-            flash[:success] = "Welcome"
-        redirect_to @user 
+            @user.send_activation_email
+            flash[:info] = "Please check your email to activate your account"
+            redirect_to root_url
+            #log_in @user 
+            #flash[:success] = "Welcome"
+            #redirect_to @user 
         else 
-        flash.now[:danger] = 'invalid email/password combination'
-        render 'new'
+            #flash.now[:danger] = 'invalid email/password combination'
+            render 'new'
         end 
     end 
 
@@ -39,6 +42,14 @@ class UsersController < ApplicationController
         flash[:success] = "User deleted"
         redirect_to users_url 
     end
+
+    def generate_new_password_email user =
+        User.find(params[:user_id]) 
+        user.send_reset_password_instructions 
+        flash[:notice] = "Reset passwordpassword instructions have been sent to #{user.email}." 
+        redirect_to admin_user_path(user)
+    end
+
     private 
     def user_params 
         params.require(:user).permit(:first_name, :last_name, :email, :password,
