@@ -15,7 +15,11 @@ class User < ApplicationRecord
     has_many :subscriptions, through: :user_subscriptions
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }
-    # returns random token 
+    # returns random token
+    def pasword_reset_expired?
+        reset_sent_at < 2.hours.ago 
+    end 
+     
     def User.new_token 
         SecureRandom.urlsafe_base64 
     end
