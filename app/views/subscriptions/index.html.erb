@@ -1,0 +1,8 @@
+   <h1>Subscriptions</h1>
+        <%= link_to "New subscription", new_subscription_path %>
+        <div id="subscriptions">
+          <% @subscriptions.each do |subscription| %>
+            <h2>Level: <%= link_to subscription.level, subscription %></h2>
+            <p>Description: <%= subscription.description %></p>
+           <% end %>
+</div>

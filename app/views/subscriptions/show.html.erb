@@ -1,0 +1,8 @@
+<% @title = "Cat Store" %>
+<h1>Level:  <%= @subscription.level %></h1>
+<p>Description: <%= @subscription.description%></p>
+<li><%= link_to "Edit subscription", edit_subscription_path(@subscription) %></li>
+<li><%= link_to "Delete subscription",
+            subscription_path(@subscription), 
+            method: :delete, 
+            data: { confirm: 'Are you sure?' } %></li> 
