@@ -8,12 +8,12 @@ class BoxesController < ApplicationController
     def create
         binding.pry
         @box = Box.new(box_params)
-
         if @box.save 
           flash[:notice] = "Box has been created."
           redirect_to @box 
         else
-            #nothing, het
+          flash[:alert] = "Box has not been created."
+          render "new"
         end 
     end
     def show
