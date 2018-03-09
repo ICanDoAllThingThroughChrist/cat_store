@@ -1,0 +1,14 @@
+<h1>New Box</h1>
+<%= form_for(@box) do |f| %>
+<p>
+<%= f.label :subscription_level %>
+<%= f.text_field :subscription_level%>
+<%= f.label :month %>
+<%= f.text_field :month%>
+<%= f.label :year %>
+<%= f.text_field :year%>
+<%= f.label :title %>
+<%= f.text_field :title%>
+</p>
+<%= f.submit %>
+<% end %>

@@ -1,10 +1,7 @@
 require "rails_helper"
 RSpec.feature "Users can create new boxes" do 
     scenario "with valid attributes" do 
-        visit "/"
-
-        click_lin "New Box"
-
+        visit "/boxes/new"
         fill_in "title", with: "Visual Studio Code"
         fill_in "month", with: "March"
         fill_in "year", with: "2018"
