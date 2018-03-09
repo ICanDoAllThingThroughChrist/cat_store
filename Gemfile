@@ -35,12 +35,14 @@ gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 gem 'devise', '~> 4.2'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
-  gem 'selenium-webdriver'
-  gem 'capybara', '~> 2.18'
-  gem 'pry', '~> 0.10.3'
- gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
+gem 'selenium-webdriver'
+gem 'capybara', '~> 2.18'
+gem 'pry', '~> 0.10.3'
+gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
+gem 'carrierwave', '~> 0.11.2'
+gem 'mini_magick', '~> 4.8'
 end
 
 group :development do

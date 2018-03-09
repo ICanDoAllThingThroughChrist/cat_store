@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "boxes#index"
   resources :boxes
-  
+  resources :items
   # namespace :admin do
   #   root "application#index"
   #   resources :boxes, only: [:new, :create, :destroy]

@@ -1,0 +1,11 @@
+   <h1>items</h1>
+        <%= link_to "New item", new_item_path %>
+        <div id="items">
+          <% @items.each do |item| %>
+            <h2>Title: <%= link_to item.title, item %></h2>
+            <p>Description: <%= item.description %></p>
+            <p>Image: <%= item.image %></p>
+            <p>Size: <%= item.size %></p>
+            <p>URL: <%= item.URL %></p>
+           <% end %>
+</div>
