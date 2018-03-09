@@ -1,1 +1,10 @@
-<%= link_to "New Box", new_box_url %>
+   <h1>Boxes</h1>
+        <%= link_to "New Box", new_box_path %>
+        <div id="Boxes">
+          <% @boxes.each do |box| %>
+            <h2><%= link_to box.title, box %></h2>
+            <p><%= box.subscription_level %></p>
+            <p><%= box.year %></p>
+            <p><%= box.month %></p>
+          <% end %>
+</div>
