@@ -34,6 +34,12 @@ class BoxesController < ApplicationController
         end
 
     end 
+    def destroy
+        @box = Box.find(params[:id])
+        @box.destroy
+        flash[:notice] = "box has been deleted."
+        redirect_to boxes_path
+    end
 
 private
     def box_params
