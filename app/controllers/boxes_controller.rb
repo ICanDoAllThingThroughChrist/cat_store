@@ -19,6 +19,21 @@ class BoxesController < ApplicationController
     def show
         @box = Box.find(params[:id])
     end
+    def edit
+        @box = Box.find(params[:id])
+    end
+    def update 
+        binding.pry
+        @box = Box.find(params[:id])
+        if @box.update(box_params)
+            flash[:notice] = "Box has been updated."
+            redirect_to @box
+          else
+            flash.now[:alert] = "Box has not been updated."
+            render "edit"
+        end
+
+    end 
 
 private
     def box_params

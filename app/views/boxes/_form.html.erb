@@ -1,1 +1,24 @@
-<%= form_for([:admin, box]) do |f| %>
+<%= form_for(box) do |f| %>
+    <% if box.errors.any? %>
+    <div>
+    <h2><%= pluralize(box.errors.count, "error") %>
+    prohibited this box from being saved:</h2>
+    <ul>
+        <% box.errors.full_messages.each do |msg|%>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+    </div>
+    <% end %>
+<p>
+<%= f.label :subscription_level %>
+<%= f.text_field :subscription_level%>
+<%= f.label :month %>
+<%= f.text_field :month%>
+<%= f.label :year %>
+<%= f.text_field :year%>
+<%= f.label :title %>
+<%= f.text_field :title%>
+</p>
+<%= f.submit %>
+<% end %>
