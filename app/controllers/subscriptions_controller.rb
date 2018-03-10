@@ -43,7 +43,7 @@ class SubscriptionsController < ApplicationController
 
 private
     def subscription_params
-        params.require(:subscription).permit(:level,:description)
+        params.require(:subscription).permit(:level,:description, :rate)
     end
 
 end

@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
+  resources :visitors
   root "boxes#index"
   resources :boxes
   resources :items
+  resources :subscriptions do 
+    resources :visitors 
+  end
   # namespace :admin do
   #   root "application#index"
   #   resources :boxes, only: [:new, :create, :destroy]
