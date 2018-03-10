@@ -4,6 +4,15 @@
   </header>
   <header>
     <h2><%= @visitor.first_name %></h2>
+    <table>
+    <tr>
+    <th>Subscriber:</th>
+    <td><%=@visitor.subscriber.email %></td>
+    </tr>
+    <tr>
+    <th>Created:</th>
+    <td><%= time_ago_in_words(@visitor.created_at)%>ago</td>
+    </tr>
 </header>
    <li><%= @visitor.last_name %></li>
    <li><%= @visitor.email %></li>

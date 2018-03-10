@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
     before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
     before_action :correct_user, only: [:edit, :update]
-    before_action :set_subscription
+    #before_action :set_subscription
     before_action :admin_user, only: :destroy
     def index 
         @users = User.all
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     end 
     
     def new 
-        @user = @subscription.users.build
+        @user = User.new
     end 
 
     def create 
@@ -73,7 +73,7 @@ class UsersController < ApplicationController
         redirect_to(root_url) unless current_user.admin?
     end
 
-    def :set_subscription 
-        @subscription = Subscription.find(params[:subscription_id])
-    end
+    # def set_subscription 
+    #     @subscription = Subscription.find(params[:subscription_id])
+    # end
 end

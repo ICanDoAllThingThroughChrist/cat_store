@@ -6,6 +6,7 @@ class VisitorsController < ApplicationController
     end
     def create 
         @visitor = @subscription.visitors.build(visitor_params)
+        @visitor.subscriber = current_user
         if @visitor.save 
             flash[:notice] = "Visitor has been created"
             redirect_to [@subscription, @ticket]

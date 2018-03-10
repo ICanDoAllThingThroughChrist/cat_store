@@ -5,4 +5,6 @@ class Visitor < ApplicationRecord
     validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
+    belongs_to :subscription
+    belongs_to :subscriber, class_name: "User"
 end
