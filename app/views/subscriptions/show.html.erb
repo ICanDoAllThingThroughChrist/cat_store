@@ -14,3 +14,12 @@
       class: "new" %></li>
   </ul>
 </header> 
+<ul>
+<% @subcription.visitors.each do |visitor| %>
+<li>
+#<%= visitor.id%> -
+<%= link_to visitor.first_name, [@subscription, visitor] %>
+</li>
+<% end %>
+</ul>
+
