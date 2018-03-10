@@ -16,7 +16,23 @@ class VisitorsController < ApplicationController
     end
     def show 
     end
+    def edit 
+    end
+    def update 
+        if @visitor.update(ticket_params)
+            flash[:notice] = "Visitor has been updated"
+            redirect_to [@subscription, @visitor]
+        else 
+            flash.now[:alert] = "Visitor has not been updated"
+            render "edit"
+        end
+    end
+    def destroy 
+        @visitor.destroy
+        flash[:notice] = "goodbye" 
 
+        redirect_to @subscription 
+    end
     private 
     def visitor_params
         params.require.(:visitor).permit(:first_name, :last_name, :email )

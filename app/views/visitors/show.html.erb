@@ -8,3 +8,12 @@
    <li><%= @visitor.last_name %></li>
    <li><%= @visitor.email %></li>
 </div>
+<header>
+<h2><% @visitor.first_name %></h2>
+<ul>
+<li><%= link_to "Edit Visitor Subscription"%>, [:edit, @subscription, @visitor]</li>
+<li><%= link_to "Delete Visitor from Suscription", [:@subscription, @visitor], method: :delete,
+data: {confirm: "Are you sure you want to delete this visitor's subscription?"}, 
+class: "delete"%> </li>
+</ul>
+</header>
