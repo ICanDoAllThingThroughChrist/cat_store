@@ -1,7 +1,7 @@
 <% @title = "Cat Store" %>
 <h1>Title:  <%= @item.title %></h1>
 <p>Description: <%= @item.description%></p>
-<p>Image: <%= @item.image%></p>
+<p>Image: <%= image_tag @item.image if @item.image?%></p>
 <p>size: <%= @item.size%></p>
 <p>URL: <%= @item.URL%></p>
 <li><%= link_to "Edit item", edit_item_path(@item) %></li>

@@ -4,6 +4,7 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
+
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -43,6 +44,7 @@ gem 'pry', '~> 0.10.3'
 gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
 gem 'carrierwave', '~> 0.11.2'
 gem 'mini_magick', '~> 4.8'
+#https://www.sitepoint.com/image-processing-rails/
 end
 
 group :development do

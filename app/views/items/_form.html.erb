@@ -16,7 +16,9 @@
 <%= f.label :description %>
 <%= f.text_field :description%>
 <%= f.label :image %>
+<%= image_tag(item.image_url) if item.image? %>
 <%= f.file_field :image, accept: 'image/jpeg, image/gif, image/png' %>
+<%= f.hidden_field :image_cache %>
 </p>
 <%= f.submit %>
 <% end %>

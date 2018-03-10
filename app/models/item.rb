@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+    attr_accessor :image_cache, :image
     has_many :box_items 
     has_many :boxes, through: :box_items
     mount_uploader :image, ImageUploader

@@ -4,7 +4,7 @@
           <% @items.each do |item| %>
             <h2>Title: <%= link_to item.title, item %></h2>
             <p>Description: <%= item.description %></p>
-            <p>Image: <%= item.image %></p>
+            <p>Image: <%= image_tag(item.image) %></p>
             <p>Size: <%= item.size %></p>
             <p>URL: <%= item.URL %></p>
            <% end %>
