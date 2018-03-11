@@ -21,8 +21,8 @@
 <%= f.label "Select Item"%><br>
 <%= f.collection_check_boxes :item_ids, @item, :id, :title %><br>
 <%= f.fields_for :items do |item_fields| %><br>
-<%= item_fields.label :title%><br>
-<%= item_fields.text_field :title%><br>
+<h4>New Items Only: <%= item_fields.label :title %></h4>
+<%= item_fields.text_field :title %><br>
 <% end %>
 </p>
 <%= f.submit %>

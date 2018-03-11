@@ -5,8 +5,8 @@ class Box < ApplicationRecord
     # validates :month, presence: true 
     # validates :year, presence: true
     # validates :subscription_level, presence: true
-    accepts_nested_attributes_for :items 
-
+    accepts_nested_attributes_for :items
+    
     def add_item(item)
         box_item = self.box_items.find_by(item_id: item.id)
         if box_item
@@ -15,25 +15,23 @@ class Box < ApplicationRecord
           box_item = self.box_items.build(item_id: item.id)
         end
         box_item
-      end
+    end
     def items_attributes=(item_attributes)#a method provided by accepts_nested_attributes_for :item
         item_attributes.each do |key, value|
-            binding.pry
+            #binding.pry
             if !value[:title].empty?
-                binding.pry
-                new_item= Item.find_or_create_by(title: value[:title])
-                binding.pry#self.box_items.count?
-                    self.box_items.each do |box_item|
-                        binding.pry
-                        if new_item.title == box_item.item.title
-                            binding.pry
-                            box_item.quantity += 1 #The quantity of the item should be stored in a join table joining the boxes and the items
-                            #self.box_items.build_item(title: value[:title]) 
-                        else 
-                            box_item.item=(new_item) 
-                            binding.pry       
-                        end               
+                new_item = Item.find_or_create_by(title: value[:title])
+                box_item = self.box_items.find_by(item_id: new_item.id)
+                #binding.pry 
+                    if box_item
+                        box_item.quantity += 1
+                        #binding.pry
+                    else
+                        box_item = self.box_items.build(item_id: new_item.id)
+                        #binding.pry
                     end
+                    box_item
+                    #binding.pry   
             end 
         end
     end 
