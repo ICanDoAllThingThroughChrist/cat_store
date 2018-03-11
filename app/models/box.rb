@@ -21,19 +21,19 @@ class Box < ApplicationRecord
             binding.pry
             if !value[:title].empty?
                 binding.pry
-                if new_item = Item.find_by(title: value[:title])
-                    binding.pry
+                new_item= Item.find_or_create_by(title: value[:title])
+                binding.pry#self.box_items.count?
                     self.box_items.each do |box_item|
+                        binding.pry
                         if new_item.title == box_item.item.title
+                            binding.pry
                             box_item.quantity += 1 #The quantity of the item should be stored in a join table joining the boxes and the items
+                            #self.box_items.build_item(title: value[:title]) 
                         else 
-                            self.box_items 
+                            box_item.item=(new_item) 
+                            binding.pry       
                         end               
                     end
-                    binding.pry
-                else 
-                    self.items.build(title: value[:title])
-                end 
             end 
         end
     end 

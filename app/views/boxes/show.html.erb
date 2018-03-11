@@ -1,7 +1,7 @@
 <% @title = "Cat Store" %>
 <ul>
 <% @box.box_items.each do |boxitem| %>
-<h3>Box Item Quantity and Title: <%= boxitem.quantity %> &times; <%= boxitem.item.title%></h3>
+    <h3>Box Item Quantity and Title: <%= boxitem.quantity %> &times; <%= boxitem.item.title%></h3>
     <li>Description of the Box Item: <%= boxitem.item.description%></li>
 <% end %>
 </ul>
