@@ -1,9 +1,16 @@
 class BoxesController < ApplicationController
+    include CurrentBox
+    before_action :set_box, only: [:show, :edit, :update, :destroy]
+    rescue_from ActiveRecord::RecordNotFound, with: :invalid_box
     def index
         @boxes = Box.all
     end
     def new
         @box = Box.new
+         3.times do
+            @box.items.build
+        end
+        @item = Item.all
     end
     def create
         binding.pry
@@ -42,7 +49,11 @@ class BoxesController < ApplicationController
     end
 
 private
+    def invalid_box
+    logger.error "Attempt to access invalid box #{params[:id]}"
+    redirect_to boxes_ptah, flash[:notice]='invalid box'
+    end
     def box_params
-        params.require(:box).permit(:subscription_level,:month,:year,:title)
+        params.require(:box).permit(:subscription_level,:month,:year,:title, item_ids: [], items_attributes: [:title])
     end
 end

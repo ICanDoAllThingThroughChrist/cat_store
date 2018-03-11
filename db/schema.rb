@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180310175250) do
+ActiveRecord::Schema.define(version: 20180310230728) do
 
   create_table "box_items", force: :cascade do |t|
     t.integer "box_id"
     t.integer "item_id"
-    t.integer "quantity"
     t.string "integer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "quantity", default: 1
   end
 
   create_table "boxes", force: :cascade do |t|

@@ -7,5 +7,6 @@
             <p>Image: <%= image_tag(item.image) %></p>
             <p>Size: <%= item.size %></p>
             <p>URL: <%= item.URL %></p>
+            <p><%= button_to 'Add to Box', box_items_path(item_id: item)%>
            <% end %>
 </div>

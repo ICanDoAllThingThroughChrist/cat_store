@@ -1,15 +1,21 @@
 Rails.application.routes.draw do
   root "boxes#index"
-  resources :boxes
   resources :items
+  resources :boxes do
+    resources :items
+  end
   resources :subscriptions do 
     resources :visitors 
   end
   devise_for :users
+  namespace :admin do
+    root "application#index"
+  end
   get 'password_resets/new'
   get 'password_resets/edit'
   resources :user_subscriptions
   get '/login', to: 'sessions#new'
+  get '/logout', to: 'sessions#destroy'
   get '/signup', to: 'users#new'
   resources :box_items
   resources :subscriptions

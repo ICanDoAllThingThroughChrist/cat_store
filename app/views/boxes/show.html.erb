@@ -1,10 +1,16 @@
 <% @title = "Cat Store" %>
-<h1>Title:  <%= @box.title %></h1>
-<p><%= @box.subscription_level%></p>
-<p><%= @box.month%></p>
-<p><%= @box.year%></p>
-<li><%= link_to "Edit Box", edit_box_path(@box) %></li>
-<li><%= link_to "Delete Box",
+<ul>
+<% @box.box_items.each do |boxitem| %>
+<h3>Box Item Quantity and Title: <%= boxitem.quantity %> &times; <%= boxitem.item.title%></h3>
+    <li>Description of the Box Item: <%= boxitem.item.description%></li>
+<% end %>
+</ul>
+<%# <h1>Title:<%= @box.title %></h1>
+<%# <p><%= @box.subscription_level%></p>
+<%# <p><%= @box.month%></p>
+<%# <p><%= @box.year%></p>
+<%# <li><%= link_to "Edit Box", edit_box_path(@box) %></li>
+<%# <li><%= link_to "Delete Box",
             box_path(@box), 
             method: :delete, 
-            data: { confirm: 'Are you sure?' } %></li> 
+            data: { confirm: 'Are you sure?' } %></li>

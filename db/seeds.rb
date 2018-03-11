@@ -24,3 +24,7 @@ password_confirmation: password,
 activated: true,
 activated_at: Time.zone.now)
 end
+unless User.exists?(email: "admin@visitor.com")
+    User.create!(email: "admin@visitor.com", password: "password", admin: true
+    ) 
+end

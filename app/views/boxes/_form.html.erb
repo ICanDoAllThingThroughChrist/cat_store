@@ -11,14 +11,19 @@
     </div>
     <% end %>
 <p>
-<%= f.label :subscription_level %>
-<%= f.text_field :subscription_level%>
-<%= f.label :month %>
-<%= f.text_field :month%>
-<%= f.label :year %>
-<%= f.text_field :year%>
-<%= f.label :title %>
-<%= f.text_field :title%>
+<%= f.label :month %><br>
+<% select_list = {Jan: 1, Feb: 2,March: 3, April: 4, May: 5, June: 6 }%>
+<%= f.select :month, select_list%><br>
+<%= f.label :year %><br>
+<%= f.text_field :year%><br>
+<%= f.label :title %><br>
+<%= f.text_field :title%><br>
+<%= f.label "Select Item"%><br>
+<%= f.collection_check_boxes :item_ids, @item, :id, :title %><br>
+<%= f.fields_for :items do |item_fields| %><br>
+<%= item_fields.label :title%><br>
+<%= item_fields.text_field :title%><br>
+<% end %>
 </p>
 <%= f.submit %>
 <% end %>
