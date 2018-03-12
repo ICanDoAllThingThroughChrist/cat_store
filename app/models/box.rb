@@ -6,68 +6,98 @@ class Box < ApplicationRecord
     def items_attributes=(item_attributes)#a method provided by accepts_nested_attributes_for :item
         #@box = set_box
         item_attributes.each do |key, value|
-            #binding.pry
-            if !value[:title].empty?
-                    binding.pry
-                    c = 1
-                    while c < 3
-                    new_item = Item.find_by(title: value[:title])
-                    if !new_item.nil?
-                        #how to create a box to join to an existing item
-                    else
-                        @boxes = [] 
-                        @box.box_items.each do |box_item| 
-                            if box_item.item_id == new_item.id
-                                        box_item.quantity += 1
-                            elsif box_item.item_id != new_item.id
-                                        @boxes << Box.create(:item_ids => new_item.id)
-                            end
+            if key == "0"#binding.pry
+                if !value[:title].empty?
+                       if new_item = Item.find_by(title: value[:title])
+                                    #the box creation should not create a new item, 
+                                    #how to create a box to join to an existing item
+                                    @box1 = Box.create
+                                    #binding.pry
+                                    @box1.items.build
+                                    #binding.pry
+                                    @box1.items.create("title" => "#{new_item.title}")
+                                    # quantity of the item should be stored in a join table, 
+                                    binding.pry
+                                    puts "#{@box1.box_items.count}" 
+                                    #@box1.box_items.quantity += 0
+                        elsif new_item = Item.create(title: value[:title])
+                                    # a new item is created, for there were none in Items
+                                    # create a new box with new item
+                                    @box1= Box.create 
+                                    #@box1.items.build
+                                    @box1.items.create("title" => "#{new_item.title}")
+                                    puts "#{@box1.box_items.count}" 
                         end
-                    c += 1
-                    end  
-                    @boxes 
+                        # created box1
+                            @box1
+                end
+            elsif key == "1"
+                if !value[:title].empty?
+                    if new_item = Item.find_by(title: value[:title])
+                                #item exists, 
+                                #+ to a random box
+                                    @box1.items << new_item
+                                    puts "#{@box1.box_items.count}" 
+                    elsif new_item = Item.create("title" => "new_item.title")
+                                #no items = create box2 and build a new assoc item
+                                    #@box2= Box.create 
+                                    #@box2.items.build
+                                    @box2.items.create("title" => "#{new_item.title}")
+                                    puts "#{@box2.box_items.count}" 
+                    end
+                        @box1 
+                        @box2
+                end
+            elsif key == "2"
+                if !value[:title].empty?
+                    if new_item = Item.find_by(title: value[:title])
+                                #item exists, 
+                                #+ to a random box(could be box1 or box2) which has the item
+                                #+ box_item quantity by 1 
+                                @box1.items.each do |item|
+                                    #binding.pry
+                                    if item.title == new_item.title
+                                        puts "#{@box1.box_items.count}" 
+                                    elsif item.title != new_item.title 
+                                        @box1.items.create("title" => "#{new_item.title}")
+                                    end 
+                                end 
+                                puts "#{@box1.box_items.count}"
+                                box1_items_count = "#{@box1.box_items.count}"
+                                if !@box2.nil?
+                                    @box2.items.each do |item|
+                                        if item.title == new_item.title
+                                            puts "#{@box2.box_items.count}" 
+                                        elsif item.title != new_item.title 
+                                            @box2.items.create("title" => "#{new_item.title}")
+                                        end 
+                                    end
+                                    puts "#{@box2.box_items.count}"
+                                    box2_items_count = "#{@box2.box_items.count}"
+
+                                    if box1_items_count == "3" || box2_items_count == "1"
+                                        puts "2 items added(box1 and box2), so delete 1 from 1 of 2 boxes"
+                                    elsif  box1_items_count == "2" || box2_items_count == "0"
+                                        puts "no existing item is found in either box, need to create a 3rd box" 
+                                    end 
+                                end
+                    elsif new_item = Item.create(title: value[:title]) 
+                                #no items = create box3 and build a new assoc item
+                                #@box3= Box.create 
+                                #@box3.items.build
+                                @box3.items.create("title" => "#{new_item.title}")
+                                puts "#{@box3.box_items.count}" 
+                    end 
+                    @box1 
+                    @box2 
+                    @box3
+                end
             end
+            @box1 
+            @box2 
+            @box3
+            binding.pry
         end
     end 
-
-    # To meet the nested form 
-    # and custom attribute writer you should be 
-    # able to add up to three items to the box 
-    # as part of creating the box, 
-    # and if their (3 item's attributes' titles ) 
-    # title matches exactly an existing item, 
-    # the box creation should not create a new item, 
-    # the box creation should just 
-    # join an existing item. 
-    # The quantity of the item should 
-    # be stored in a join table,  
-    # (thus joining the boxes and the items) 
-    # so one box may have the 3 oz kitty bright hair gel and 
-    # another "box" might have the 6oz.
-
-    def box_item_title_value_comparison
-        binding.pry
-        @box = Box.create
-        new_item = Item.find_by(title: value[:title])
-        if @box.items == [] && new_item.present?
-            binding.pry
-            @box.items.push new_item
-        else
-            c = 1
-            while c < 3
-            @boxes = [] 
-                @box.box_items.each do |box_item| 
-                    if box_item.item_id == new_item.id
-                        box_item.quantity += 1
-                    elsif box_item.item_id != new_item.id
-                        @boxes << Box.create(:item_ids => new_item.id)
-                    end
-                    c += 1
-                end
-            end 
-            @boxes
-        end 
-    end
-        
-
+   
 end

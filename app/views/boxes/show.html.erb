@@ -1,11 +1,7 @@
-<% @title = "Cat Store" %>
-<ul>
-<% @box.box_items.each do |boxitem| %>
-    <h3>Box Item Quantity and Title: <%= boxitem.quantity %> &times; <%= boxitem.item.title%></h3>
-    <li>Description of the Box Item: <%= boxitem.item.description%></li>
+<h1>Title:<%= @box.title %></h1>
+<% @box.items.each do |item| %>
+    <h3>Item Title: <%= "#{item.title}"%></h3>
 <% end %>
-</ul>
-<%# <h1>Title:<%= @box.title %></h1>
 <%# <p><%= @box.subscription_level%></p>
 <%# <p><%= @box.month%></p>
 <%# <p><%= @box.year%></p>
