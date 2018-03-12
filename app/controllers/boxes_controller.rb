@@ -1,11 +1,16 @@
 class BoxesController < ApplicationController
     include CurrentBox
+    include SessionsHelper
     before_action :set_box, only: [:show, :edit, :update, :destroy]
     rescue_from ActiveRecord::RecordNotFound, with: :invalid_box
     def index
         @boxes = Box.all
     end
     def new
+        #@user = current_user
+        binding.pry
+        #@box = @user.boxes.build
+        #@box = set_box
         @box = Box.new
          3.times do
             @box.items.build
@@ -54,6 +59,6 @@ private
     redirect_to boxes_ptah, flash[:notice]='invalid box'
     end
     def box_params
-        params.require(:box).permit(:subscription_level,:month,:year,:title, item_ids: [], items_attributes: [:title])
+        params.require(:box).permit(:user_id, :subscription_level,:month,:year,:title, item_ids: [], items_attributes: [:title])
     end
 end

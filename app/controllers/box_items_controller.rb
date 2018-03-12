@@ -3,6 +3,7 @@ class BoxItemsController < ApplicationController
     before_action :set_box, only: [:create]
     before_action :set_box_item, only: [:show, :edit, :update, :destroy]
     def create
+        @box = set_box
         item = Item.find(params[:item_id])
         @box_item = @box.add_item(item)
         if @box_item.save

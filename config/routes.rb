@@ -1,13 +1,11 @@
 Rails.application.routes.draw do
   root "boxes#index"
   resources :items
-  resources :boxes do
-    resources :items
-  end
+  resources :boxes 
   resources :subscriptions do 
     resources :visitors 
   end
-  devise_for :users
+  # devise_for :users
   namespace :admin do
     root "application#index"
   end
@@ -15,6 +13,7 @@ Rails.application.routes.draw do
   get 'password_resets/edit'
   resources :user_subscriptions
   get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   get '/signup', to: 'users#new'
   resources :box_items
