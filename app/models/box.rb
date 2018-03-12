@@ -34,15 +34,17 @@ class Box < ApplicationRecord
             elsif key == "1"
                 if !value[:title].empty?
                     if new_item = Item.find_by(title: value[:title])
-                                #item exists, 
+                                #item exists in the db,  add 1 to join box attribute, quantity.
                                 #+ to a random box
-                                    @box1.items << new_item
+                                    binding.pry
+                                    @box1.items.box_items_revise("quantity" => "2")
+                                    #@box1.items << new_item # this adds another row to join box
                                     puts "#{@box1.box_items.count}" 
                     elsif new_item = Item.create("title" => "new_item.title")
                                 #no items = create box2 and build a new assoc item
                                     #@box2= Box.create 
                                     #@box2.items.build
-                                    @box2.items.create("title" => "#{new_item.title}")
+                                    @box2.items.create("title" => "#{new_item.title}")#1st item in join table attribute
                                     puts "#{@box2.box_items.count}" 
                     end
                         @box1 

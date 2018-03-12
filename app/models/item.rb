@@ -1,7 +1,8 @@
 class Item < ApplicationRecord
     attr_accessor :image_cache, :image
-    has_many :box_items 
-    has_many :boxes, through: :box_items
+    belongs_to :box_item
+    # has_many :box_items 
+    # has_many :boxes, through: :box_items
     mount_uploader :image, ImageUploader
     validate :image_size
 
