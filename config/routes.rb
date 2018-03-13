@@ -1,25 +1,40 @@
 Rails.application.routes.draw do
+  namespace :visitor do
+    get 'subscriptions/index'
+    get 'subscriptions/show'
+    get 'subscriptions/new'
+    post 'subscriptions/create'
+  end
+
+  namespace :subscriber do
+    get 'subscriptions/index'
+    get 'subscriptions/show'
+    get 'subscriptions/delete'
+  end
+
+  namespace :admin do
+    get 'boxes/new'
+    post 'boxes/create'
+    get 'boxes/update'
+    get 'boxes/manual_ship'
+  end
+
   root "boxes#index"
   
-  resources :boxes do
-    resources :items
-  end 
-  resources :subscriptions do 
-    resources :visitors 
+  resource :boxes do 
+    resources :items 
   end
   # devise_for :users
   namespace :admin do
     root "application#index"
+    get '/boxes/:id/items/new', to: 'index#new'
   end
   get 'password_resets/new'
   get 'password_resets/edit'
-  resources :user_subscriptions
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   get '/signup', to: 'users#new'
-  resources :box_items
-  resources :subscriptions
   resources :users
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :account_activations, only: [:edit]
