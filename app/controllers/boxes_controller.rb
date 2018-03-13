@@ -19,7 +19,10 @@ class BoxesController < ApplicationController
     end
     def create
         binding.pry
+        @item = Item.all
+        binding.pry
         @box = Box.new(box_params)
+        binding.pry
         if @box.save 
           flash[:notice] = "Box has been created."
           redirect_to @box 
@@ -59,6 +62,6 @@ private
     redirect_to boxes_ptah, flash[:notice]='invalid box'
     end
     def box_params
-        params.require(:box).permit(:user_id, :subscription_level,:month,:year,:title, item_ids: [], items_attributes: [:title])
+        params.require(:box).permit(:user_id, :subscription_level,:month,:year,:title, item_ids:[], items_attributes: [:title])
     end
 end

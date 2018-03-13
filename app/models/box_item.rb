@@ -1,7 +1,10 @@
 class BoxItem < ApplicationRecord
     belongs_to :box 
-    has_many :items
+    belongs_to :item
     # belongs_to :item
+    # attr_accessor :quantity
+    # attr_writer :quantity 
+    # attr_reader :quantity
     def create
         current_user.create_current_box unless current_user.current_box
         box_item = current_user.current_box.add_item(params[:item_id])

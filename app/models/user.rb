@@ -15,6 +15,17 @@ class User < ApplicationRecord
     has_many :subscriptions, through: :user_subscriptions
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }
+    has_many :boxes 
+    #belongs_to :current_box, :class_name => "Box"#this prevents sign in & saving box"
+
+    def create_current_box 
+        new_box = boxes.create 
+        self.current_cart_id = new_cart.id 
+        save 
+    end
+    def remove_cart 
+        self.current_cart_id = nil 
+    end
     # returns random token
     def pasword_reset_expired?
         reset_sent_at < 2.hours.ago 

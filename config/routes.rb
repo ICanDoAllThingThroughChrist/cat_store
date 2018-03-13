@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root "boxes#index"
-  resources :items
-  resources :boxes 
+  
+  resources :boxes do
+    resources :items
+  end 
   resources :subscriptions do 
     resources :visitors 
   end
