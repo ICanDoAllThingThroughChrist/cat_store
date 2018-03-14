@@ -32,4 +32,23 @@ class SessionsController < ApplicationController
     binding.pry
     redirect_to root_url
   end
+
+  private 
+
+  def set_box
+    case @box  
+    when @box != nil
+       = Box.find(session[:box_id])
+    when @box == nil 
+    @box = Box.create 
+    session[:box_id] = @box.id 
+    end 
+  end 
+
+  protected 
+    def authorize
+        unless User.find_by_id(session[:user_id]) 
+            redirect_to login_url, :notice => "Please log in"
+        end 
+    end 
 end
