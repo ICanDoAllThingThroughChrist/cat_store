@@ -4,7 +4,7 @@ class Visitor::SubscriptionsController < Visitor::ApplicationController
   end
 
   def show
-    binding.pry
+    #binding.pry
     @subscription = Subscription.find(params[:id])
   end
 

@@ -1,18 +1,20 @@
 Rails.application.routes.draw do
+ 
+  #resources :subscriptions 
+  # resources :visitorsubscription 
+  # #   get 'visitorsubscriptions', to: 'visitorssubscriptions#new'
+  # #   post 'visitorsubscriptions', to: 'visitorsubscriptions#create'
+  # # end
 
   namespace :visitor do
-    get 'subscriptions/index'
-    get 'subscriptions/new'
-    get 'subscriptions/:id/show', to: 'subscriptions#show'
-    post 'subscriptions/create'
+    get 'subscriptions/index',  to: 'visitorsubscriptions#index'
+    get '/subscriptions/:id/show', to: 'visitorsubscriptions#show'
+    post '/subscriptions/create', to: 'visitorsubscriptions#create'
+    get 'subscriptions/delete', to: 'visitorsubscriptions#delete'
   end
   
-  resources  :subscriptions 
-
+ 
   namespace :subscriber do
-    get 'subscriptions/index'
-    get 'subscriptions/show'
-    get 'subscriptions/delete'
     get 'boxes/index'
     get 'boxes/:id/show', to: 'boxes#show'
   end

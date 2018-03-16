@@ -2,24 +2,5 @@
 <h1>Level:  <%= @subscription.level %></h1>
 <p>Description: <%= @subscription.description%></p>
 <p>Rate: <%= @subscription.rate%></p>
-<li><%= link_to "Edit subscription", edit_subscription_path(@subscription) %></li>
-<li><%= link_to "Delete subscription",
-            subscription_path(@subscription), 
-            method: :delete, 
-            data: { confirm: 'Are you sure?' } %></li>
-<header>
-  <h2>Visitors</h2>
-  <ul class="actions">
-    <li><%= link_to "New Visitor", new_subscription_visitor_path(@subscription),
-      class: "new" %></li>
-  </ul>
-</header> 
-<ul>
-<% @subcription.visitors.each do |visitor| %>
-<li>
-#<%= visitor.id%> -
-<%= link_to visitor.first_name, [@subscription, visitor] %>
-</li>
-<% end %>
-</ul>
+
 

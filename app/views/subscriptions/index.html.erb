@@ -5,7 +5,7 @@
             <%# binding.pry %>
             <% hidden_field_tag subscription.id %>
             <%# binding.pry %>
-            <h2>Level: <%= link_to subscription.level, visitor_url(subscription)%></h2>
+            <h2>Level: <%= link_to subscription.level, subscription_url(subscription)%></h2>
             <p>Description: <%= subscription.description %></p>
            <% end %>
         </div>
