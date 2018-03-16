@@ -37,11 +37,11 @@ class SessionsController < ApplicationController
 
   def set_box
     case @box  
-    when @box != nil
-       = Box.find(session[:box_id])
-    when @box == nil 
-    @box = Box.create 
-    session[:box_id] = @box.id 
+      when @box != nil
+        = Box.find(session[:box_id])
+      when @box == nil 
+      @box = Box.create 
+      session[:box_id] = @box.id 
     end 
   end 
 

@@ -2,10 +2,12 @@ Rails.application.routes.draw do
 
   namespace :visitor do
     get 'subscriptions/index'
-    get 'subscriptions/show'
     get 'subscriptions/new'
+    get 'subscriptions/:id/show', to: 'subscriptions#show'
     post 'subscriptions/create'
   end
+  
+  resources  :subscriptions 
 
   namespace :subscriber do
     get 'subscriptions/index'
@@ -34,10 +36,10 @@ Rails.application.routes.draw do
   end
   get 'password_resets/new'
   get 'password_resets/edit'
-  get '/login', to: 'sessions#new'
+  get '/login' => 'sessions#new', :as => 'login'
   post '/login', to: 'sessions#create'
-  get '/logout', to: 'sessions#destroy'
-  get '/signup', to: 'users#new'
+  get '/logout' => 'sessions#destroy', :as => 'logout'
+  get '/signup' => 'users#new', :as => 'signup'
   resources :users
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :account_activations, only: [:edit]

@@ -13,4 +13,7 @@ class Subscriber::SubscriptionsController < Subscriber::ApplicationController
     flash[:notice] = "subscription has been deleted."
     redirect_to subscriptions_path
   end
+  #   def subscription_params
+  #     params.require(:subscription).permit(:level,:description, :rate, :id)
+  # end
 end

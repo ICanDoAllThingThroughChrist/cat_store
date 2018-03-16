@@ -1,4 +1,11 @@
 module SessionsHelper
+    # Filter method to enforce a login requirement
+# Apply as a before_action on any controller you want to protect
+    
+    def authenticate
+    logged_in? || access_denied
+    end
+
     def log_in(user)
         session[:user_id] = user.user_id
     end

@@ -1,8 +1,11 @@
    <h1>Subscriptions</h1>
-        <%= link_to "New subscription", new_subscription_path %>
-        <div id="subscriptions">
+        <%= link_to "New visitor subscription", visitor_subscriptions_new_path %>
+        <div>
           <% @subscriptions.each do |subscription| %>
-            <h2>Level: <%= link_to subscription.level, subscription %></h2>
+            <%# binding.pry %>
+            <% hidden_field_tag subscription.id %>
+            <%# binding.pry %>
+            <h2>Level: <%= link_to subscription.level, visitor_url(subscription)%></h2>
             <p>Description: <%= subscription.description %></p>
            <% end %>
-</div>
+        </div>

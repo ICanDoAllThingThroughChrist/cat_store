@@ -1,9 +1,10 @@
-class Visitor::SubscriptionsController < Visitior::ApplicationController
+class Visitor::SubscriptionsController < Visitor::ApplicationController
   def index
     @subscriptions = Subscription.all
   end
 
   def show
+    binding.pry
     @subscription = Subscription.find(params[:id])
   end
 
