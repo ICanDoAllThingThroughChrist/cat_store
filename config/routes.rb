@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   namespace :visitor do
     get 'subscriptions/index'
     get 'subscriptions/show'
@@ -10,6 +11,8 @@ Rails.application.routes.draw do
     get 'subscriptions/index'
     get 'subscriptions/show'
     get 'subscriptions/delete'
+    get 'boxes/index'
+    get 'boxes/:id/show', to: 'boxes#show'
   end
 
   namespace :admin do
@@ -21,7 +24,7 @@ Rails.application.routes.draw do
 
   root "boxes#index"
   
-  resource :boxes do 
+  resources :boxes do 
     resources :items 
   end
   # devise_for :users

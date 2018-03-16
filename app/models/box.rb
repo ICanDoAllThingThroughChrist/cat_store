@@ -2,7 +2,7 @@ class Box < ApplicationRecord
     has_many :box_items, dependent: :destroy
     has_many :items, through: :box_items
     accepts_nested_attributes_for :items
-    #belongs_to :user 
+    belongs_to :user 
 
     def add_item(item_id)
         box_item = self.box_items.find_by(item_id: item_id)

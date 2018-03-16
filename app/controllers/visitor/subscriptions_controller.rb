@@ -13,7 +13,6 @@ class Visitor::SubscriptionsController < Visitior::ApplicationController
 
   def create
     binding.pry
-        @subscription = Subscription.new(subscription_params)
         if @subscription.save 
           flash[:notice] = "subscription has been created."
           redirect_to @subscription 

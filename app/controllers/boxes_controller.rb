@@ -5,14 +5,12 @@ class BoxesController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :invalid_box
     skip_before_filter :authorize, :only => [:index, :show]
     def index
-        @boxes = Box.all
     end
     def new
     end
     def create 
     end
     def show
-        @box = Box.find(params[:id])
     end
     def edit
         @box = Box.find(params[:id])
