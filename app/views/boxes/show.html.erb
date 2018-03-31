@@ -1,7 +1,9 @@
 <h1>Title:<%= @box.title %></h1>
-<% @box.items.each do |item| %>
-    <h3>Item Title: <%= "#{item.title}"%></h3>
+<% @box.box_items.each do |box_item| %>
+<h3>Item Title: <%= "#{box_item.item.title}"%></h3>
+<h3>item's quantity: <%="#{box_item.quantity}"%></h3>
 <% end %>
+<h3>Order a new box: <%= link_to "new box order", new_box_url %></h3>
 <%# <p><%= @box.subscription_level%></p>
 <%# <p><%= @box.month%></p>
 <%# <p><%= @box.year%></p>

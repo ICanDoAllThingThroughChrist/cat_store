@@ -7,6 +7,12 @@
             <p>Image: <%= image_tag(item.image) %></p>
             <p>Size: <%= item.size %></p>
             <p>URL: <%= item.URL %></p>
-            <p><%= button_to 'Add to Box', box_items_path(item_id: item)%>
+            <% if user.admin? %>
+            <%#!--As an administrator I want to be able to
+            add a new item to a box" (title, description, image, size, URL 
+            to buy more from amazon or other partners)%>
+            <p><%= button_to 'Add to Box', box_items_path(:item_id => item)%><p>
+            <% end %>
+             <%#= button_to 'Add to Cart', line_items_path(:product_id => product) %></h4>
            <% end %>
 </div>

@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     before_action :correct_user, only: [:edit, :update]
     #before_action :set_subscription
     before_action :admin_user, only: :destroy
+    #https://stackoverflow.com/questions/23585871/implementing-multiple-user-roles
     def index 
         @users = User.all
     end 
@@ -12,6 +13,7 @@ class UsersController < ApplicationController
     
     def new 
         @user = User.new
+        #binding.pry
     end 
 
     def create 
@@ -55,7 +57,7 @@ class UsersController < ApplicationController
     private 
     def user_params 
         params.require(:user).permit(:first_name, :last_name, :email, :password,
-                                     :password_confirmation)
+                                     :password_confirmation, :role)
     end 
     def logged_in_user
         unless logged_in?

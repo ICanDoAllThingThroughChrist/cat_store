@@ -2,7 +2,12 @@ class BoxItemsController < ApplicationController
     include CurrentBox
     before_action :set_box, only: [:create]
     before_action :set_box_item, only: [:show, :edit, :update, :destroy]
-    def create
+      # GET /line_items/new
+  def new
+    @line_item = LineItem.new
+  end
+    
+  def create
         @box = set_box
         item = Item.find(params[:item_id])
         @box_item = @box.add_item(item)
@@ -11,9 +16,13 @@ class BoxItemsController < ApplicationController
         else
           redirect_to items_path, {notice: 'Unable to add item'}
         end
-    end
+  end
 
-    def box_items_params 
+    # GET /line_items/1/edit
+  def edit
+  end
+
+  def box_items_params 
       params.require(:box_item).permit(:item_id)
-    end
+  end
 end

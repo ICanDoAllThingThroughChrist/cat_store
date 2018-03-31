@@ -9,5 +9,7 @@
 <%= f.password_field :password %><br>
 <%= f.label :password_confirmation %>
 <%= f.password_field :password_confirmation %><br>
+<%= f.label :roles%>
+<%= f.collection_select :role, User::ROLES, :to_s, :humanize %><br>
 <%= f.submit %>
 <% end %>

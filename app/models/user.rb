@@ -1,8 +1,6 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-#   devise :database_authenticatable, :registerable,
-#          :recoverable, :rememberable, :trackable, :validatable
+# you can also explicitly define enum as:  enum access_level: [:employee => 0, :company_admin => 1, :super_admin => 2}
+    enum access_level: [:visitor, :subscriber, :admin]
     attr_accessor :remember_token, :activation_token, :reset_token
     before_create :create_activation_digest
     before_save { self.email = email.downcase }
@@ -15,8 +13,51 @@ class User < ApplicationRecord
     #has_many :subscriptions, through: :user_subscriptions
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }
+    has_many :orders
+    has_many :subscriptions, through: :orders
     has_many :boxes 
-    #belongs_to :current_box, :class_name => "Box"#this prevents sign in & saving box"
+    has_many :orders_of_boxes, :through => :boxes, :source => :subscriber_boxes
+
+    # def is_admin?
+    # self.has_role?('admin')
+    # end
+
+    # # changing
+    # def add_new_role(role)
+    # self.update_attributes(accepted_at: Time.now) if self.is_only_potential?
+    # self.add_role(role)
+    # end
+
+    # def make_admin!
+    #     add_new_role('admin')
+    # end
+
+    # def denounce_admin!
+    #     remove_role('admin')
+    # end
+
+    #  # checking
+    # def is_subscriber?
+    # self.has_role?('subscriber')
+    # end
+
+    # # changing
+    # def add_new_role(role)
+    # self.update_attributes(accepted_at: Time.now) if self.is_only_potential?
+    # self.add_role(role)
+    # end
+
+    # def make_subscriber!
+    #     add_new_role('subscriber')
+    # end
+
+    # def denounce_subscriber!
+    #     remove_role('subscriber')
+    # end
+
+    # def assign_default_role
+    #     self.add_role(:visitor) if self.roles.blank?
+    # end
 
     def create_current_box 
         new_box = boxes.create 
@@ -31,7 +72,7 @@ class User < ApplicationRecord
         reset_sent_at < 2.hours.ago 
     end 
      
-    def User.new_token 
+    def self.new_token 
         SecureRandom.urlsafe_base64 
     end
 
@@ -47,7 +88,7 @@ class User < ApplicationRecord
     end
 
     def forget 
-        udpdate_attribute(:remember_digest, nil)
+        update_attribute(:remember_digest, nil)
     end
     #sets password reset attributes
     def create_reset_digest

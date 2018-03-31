@@ -1,18 +1,12 @@
 <fieldset>
-<% unless logged_in? %>
-    <li class="<%= "active" if current_page?("/users/sign_up") %>">
-    <%= link_to "Sign up", new_user_path %>
-    </li>
-    <li class="<%= "active" if current_page?("/users/sign_in") %>">
-    <%= link_to "Sign in", new_user_session_path %>
-    </li>
+<%# binding.pry %>
+<%if logged_in? == false %>
+    <h4> You are not logged in </h4>
+    <li><%= link_to "Sign up", new_user_path %></li>
+    <li><%= link_to "Log in", login_path %></li>
+<% else %>
+    <li><%= link_to "new subscription order", new_visitorsubscription_path %></li>
+    <li><%= link_to "box index", boxes_path %></li>
+    <li><%= link_to "Sign out", logout_path %></li>
 <% end %>
-<% if logged_in? %>
-    <div>
-    <p> Signed in as <%= current_user.email %> </p>
-<% end %>
-    <ul>
-    <li><%= link_to "Sign out", logout_path, method: :delete %></li>
-    </ul>
-    </div>
 </fieldset>

@@ -1,3 +1,8 @@
+<ul class="nav navbar-nav">
+  <% if can? :create, Box %>
+    <li><%= link_to 'Add Box', new_box_path %></li>
+  <% end %>
+</ul>
 <%= form_for(box) do |f| %>
 <%#= f.hidden_field :user_id %>
 <% binding.pry %>
@@ -21,10 +26,11 @@
 <%= f.text_field :year%><br>
 <%= f.label :title %><br>
 <%= f.text_field :title%><br>
+<%= f.label :shipped %><%= f.check_box :shipped %><br>
 <%= f.label "Select Item"%><br>
 <%= f.collection_check_boxes :item_ids, @item, :id, :title %><br>
-<%= f.fields_for :items do |item_fields| %><br>
-<h4>New Items Only: <%= item_fields.label :title %></h4>
+<%= f.fields_for :items do |item_fields| %>
+<%= item_fields.label :items_title %><br>
 <%= item_fields.text_field :title %><br>
 <% end %>
 </p>

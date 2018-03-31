@@ -1,13 +1,17 @@
 class Admin::BoxesController < Admin::ApplicationController
+  #- As an administrator I want
+  # to be able to create a new 
+  #box (subscription level, 
+  #month and year to uniquely#
+  # identify it and a title 
+  #for the theme e.g. “cat coolers for summer”)
   def new 
            #@user = current_user
            binding.pry
            #@box = @user.boxes.build
            #@box = set_box
            @box = Box.new
-            3.times do
-               @box.items.build
-           end
+           @box.items.build
            @item = Item.all 
   end
   def create

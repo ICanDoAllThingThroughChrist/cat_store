@@ -1,13 +1,17 @@
 module SessionsHelper
     # Filter method to enforce a login requirement
-# Apply as a before_action on any controller you want to protect
+    # Apply as a before_action on any controller you want to protect
+    # helper_method :current_user
     
+    def subscriber 
+        curren_user.subscriber= true
+    end 
     def authenticate
     logged_in? || access_denied
     end
 
     def log_in(user)
-        session[:user_id] = user.user_id
+        session[:user_id] = user.id
     end
 
     def forget(user)
@@ -25,7 +29,7 @@ module SessionsHelper
     def current_user?(user)
         user == current_user 
     end
-
+    
     def current_user 
         if (user_id = session[:user_id])
             @current_user ||= User.find_by(id: user_id)
@@ -39,7 +43,7 @@ module SessionsHelper
     end
 
     def logged_in?
-        !current_user.nil? 
+        !current_user.nil? #current_user is not nil(aka not empty)
     end
 
     def log_out 

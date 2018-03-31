@@ -1,0 +1,8 @@
+   <h1>subscriber boxes</h1>
+    <li><%= link_to "New Subscriber Box", new_subscriber_box_path %></li>
+        <div>
+          <% @subscriber_boxes.each do |i| %>
+          <% binding.pry %>
+            <h2>box content:  <%= link_to "box content", box_path(i.box_id)%></h2>
+          <% end %>
+        </div>

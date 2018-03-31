@@ -1,8 +1,4 @@
 class Subscription < ApplicationRecord
-    #belongs_to :user
-    has_many :visitors, through: :visitor_subscriptions 
-    has_many :visitor_subscriptions
-
-    has_many :visitorsubscriptions
-
+    has_many :orders
+    has_many :users, through: :orders
 end

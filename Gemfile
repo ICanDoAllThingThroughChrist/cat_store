@@ -45,6 +45,10 @@ gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
 gem 'carrierwave', '~> 0.11.2'
 gem 'mini_magick', '~> 4.8'
 gem "pundit"
+gem "rolify"
+gem 'cancancan', '~> 2.0'
+gem 'bootstrap-sass'
+#https://github.com/CanCanCommunity/cancancan/wiki/Role-Based-Authorization
 #https://www.sitepoint.com/image-processing-rails/
 end
 

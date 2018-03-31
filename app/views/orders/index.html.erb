@@ -1,0 +1,10 @@
+<% binding.pry %>
+   <h1>Subscriptions</h1>
+        <div id="subscriptions">
+          <% @subscriptions.each do |subscription| %>
+            <div class="well well-sm">
+              <h2>subscription Title: <%= link_to subscription.title, subscription %></h2>
+              <p>Year: <%= subscription.year %></p>
+              <p>Month: <%= subscription.month %></p>
+        </div>
+          <% end %>

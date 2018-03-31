@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+    load_and_authorize_resource :nested => :box
     def index
         @items = Item.all
     end
