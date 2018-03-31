@@ -1,0 +1,9 @@
+<fieldset>
+<%= f.label :title, "Title of Box"%><br/>
+<%= f.text_area :title %><br/>
+<%= f.check_box :_destroy%>
+<%= f.label :_destroy, "Remove Box"%>
+<%= f.fields_for :items do |builder| %>
+    <%= render 'item_fields', f: builder %>
+<% end %>
+</fieldset>

@@ -17,48 +17,16 @@ class User < ApplicationRecord
     has_many :subscriptions, through: :orders
     has_many :boxes 
     has_many :orders_of_boxes, :through => :boxes, :source => :subscriber_boxes
+    belongs_to :role
+    # def role_name=(name)
+    #     self.role= Role.find_by(name: name)
+    #     binding.pry
+    # end 
 
-    # def is_admin?
-    # self.has_role?('admin')
-    # end
-
-    # # changing
-    # def add_new_role(role)
-    # self.update_attributes(accepted_at: Time.now) if self.is_only_potential?
-    # self.add_role(role)
-    # end
-
-    # def make_admin!
-    #     add_new_role('admin')
-    # end
-
-    # def denounce_admin!
-    #     remove_role('admin')
-    # end
-
-    #  # checking
-    # def is_subscriber?
-    # self.has_role?('subscriber')
-    # end
-
-    # # changing
-    # def add_new_role(role)
-    # self.update_attributes(accepted_at: Time.now) if self.is_only_potential?
-    # self.add_role(role)
-    # end
-
-    # def make_subscriber!
-    #     add_new_role('subscriber')
-    # end
-
-    # def denounce_subscriber!
-    #     remove_role('subscriber')
-    # end
-
-    # def assign_default_role
-    #     self.add_role(:visitor) if self.roles.blank?
-    # end
-
+    # def self.role_name 
+    #     self.role.name
+    #     binding.pry  
+    # end 
     def create_current_box 
         new_box = boxes.create 
         self.current_cart_id = new_cart.id 

@@ -5,7 +5,8 @@
     <li><%= link_to "Sign up", new_user_path %></li>
     <li><%= link_to "Log in", login_path %></li>
 <% else %>
-    <li><%= link_to "new subscription order", new_visitorsubscription_path %></li>
+    <li><%= link_to "subscriptions index and description", subscriptions_path%></li>
+    <li><%= link_to "new subscription order", new_order_path %></li>
     <li><%= link_to "box index", boxes_path %></li>
     <li><%= link_to "Sign out", logout_path %></li>
 <% end %>

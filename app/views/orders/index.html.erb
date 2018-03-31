@@ -3,8 +3,6 @@
         <div id="subscriptions">
           <% @subscriptions.each do |subscription| %>
             <div class="well well-sm">
-              <h2>subscription Title: <%= link_to subscription.title, subscription %></h2>
-              <p>Year: <%= subscription.year %></p>
-              <p>Month: <%= subscription.month %></p>
+              <h2>subscription level: <%= link_to subscription.level, subscription %></h2>
         </div>
           <% end %>

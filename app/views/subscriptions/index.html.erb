@@ -2,8 +2,7 @@
         <div>
           <% @subscriptions.each do |subscription| %>
             <% binding.pry %>
-            <p>ID: <%=subscription.id%>
-            <h2>Level: <%= link_to 'new visitor subscription click here to purchase', new_subscription_visitorsubscription_url(subscription)%></h2>
+            <h2>Level: <%= subscription.level %></h2>
             <p>Description: <%= subscription.description %></p>
             <p>Rate: <%=subscription.rate%>
            <% end %>

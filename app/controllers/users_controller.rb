@@ -17,6 +17,7 @@ class UsersController < ApplicationController
     end 
 
     def create 
+        binding.pry
         @user = User.new(user_params)
         if @user.save 
             UserMailer.account_activation(@user).deliver_now
@@ -27,8 +28,8 @@ class UsersController < ApplicationController
             #flash[:success] = "Welcome"
             #redirect_to @user 
         else 
-            #flash.now[:danger] = 'invalid email/password combination'
-            render 'new'
+            flash.now[:danger] = 'failed validations'
+            render 'login'
         end 
     end 
 
@@ -57,7 +58,7 @@ class UsersController < ApplicationController
     private 
     def user_params 
         params.require(:user).permit(:first_name, :last_name, :email, :password,
-                                     :password_confirmation, :role)
+                                     :password_confirmation, :role_id)
     end 
     def logged_in_user
         unless logged_in?

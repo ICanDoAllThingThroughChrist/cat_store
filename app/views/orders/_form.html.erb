@@ -1,11 +1,16 @@
 <%= form_for order do |f| %>
-<%= f.collection_select :subscription, Subscription.all, :id, :level %>
-<%= f.hidden_field :user_id %>
-<%= f.label: :first_name%>
-<%= f.first_name %>
-<%= f.label: :last_name%>
-<%= f.last_name %>
-<%= f.label: :email%>
-<%= f.email
+<%= f.label :subscription%><br>
+<%= f.collection_select :subscription_id, 
+    Subscription.all, :id, :description %><br>
+<%= f.label :first_name%><br>
+<%= f.text_area :first_name %><br>
+<%= f.label :last_name%><br>
+<%= f.text_area :last_name %><br>
+<%= f.label :email%><br>
+<%= f.text_area :email %><br>
+<%= f.fields_for :boxes do |builder|%>
+<%= render 'box_fields', f: builder %>
+<% end %>
 <%= f.submit %>
 <% end %>
+<%#!-  http://railscasts.com/episodes/196-nested-model-form-revised?view=asciicast%>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180331042056) do
+ActiveRecord::Schema.define(version: 20180331135620) do
 
   create_table "box_items", force: :cascade do |t|
     t.integer "box_id"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20180331042056) do
     t.integer "resource_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "access_level"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["name"], name: "index_roles_on_name"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(version: 20180331042056) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "rate"
+    t.integer "order_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -107,7 +109,8 @@ ActiveRecord::Schema.define(version: 20180331042056) do
     t.string "last_sign_in_ip"
     t.integer "subscription_id"
     t.string "role"
-    t.integer "access_level", default: 0
+    t.integer "role_id"
+    t.string "access_level"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

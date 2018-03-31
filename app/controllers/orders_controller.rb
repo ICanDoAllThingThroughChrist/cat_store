@@ -7,23 +7,32 @@ class OrdersController < ApplicationController
         end
 
         def new
-            @subscription = Subscription.find(params[:subscription_id])
-            @order = Order.new(subscription_id: params[:subscription_id])
+            @user = current_user
+            @order = Order.new
             binding.pry
         end
 
         def create
+            binding.pry
             if current_user 
+                binding.pry
                 @user = current_user
-                @subscription= Subscription.find(subscription_params[:subscription_id])
-                @order = Order.create(order_params)
-                @subscription.orders.push @order
-                if @subscription.save
+                @subscription= Subscription.find(params[:order][:subscription_id])
+                @user.subscriptions.push @subscription
+                binding.pry
+                @order = Order.new(order_params)
+                binding.pry
+                @order.user_id= current_user.id        
+                #@user.subscriptions.orders.push @order
+                binding.pry
+                if @order.save
+                    binding.pry
                     flash[:notice]= "new order saved"
-                    render "show"
                 else  
                     flash[:notice]= "order not saved"
                 end 
+                binding.pry
+                render "show"
             else 
                 flash[:alert] = "please sign up and log in to purchase subscription order and to add boxes"
                 redirect_to login_url
@@ -42,15 +51,15 @@ class OrdersController < ApplicationController
         def update 
             binding.pry
             if current_user 
-            @order = Order.find(params[:id])
-            if @order.update(order_params)
-                flash[:notice] = "subscription has been updated."
-                redirect_to @subscription
-            else
-                flash.now[:alert] = "subscription has not been updated."
-                render "edit"
+                @order = Order.find(params[:id])
+                if @order.update(order_params)
+                    flash[:notice] = "subscription has been updated."
+                    redirect_to @subscription
+                else
+                    flash.now[:alert] = "subscription has not been updated."
+                    render "edit"
+                end
             end
-
         end 
 
         def delete
@@ -62,6 +71,6 @@ class OrdersController < ApplicationController
 
         private
         def order_params
-            params.require(:Order).permit(:first_name, :last_name, :email, :id, :subscription_id)
+            params.require(:order).permit(:first_name, :last_name, :email, :id, :subscription_id, :subscription, :user_id)
         end
 end

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   # resources :subscriber_boxes
   resources :subscriptions
+  # resources :users, only: [:show, :index] do 
   resources :orders
+    # 
+  # end
   root "boxes#index"
   
   resources :boxes do 

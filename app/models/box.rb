@@ -1,11 +1,10 @@
 class Box < ApplicationRecord
-    resourcify
+    #resourcify
     has_many :box_items, dependent: :destroy
     has_many :items, through: :box_items
     accepts_nested_attributes_for :items
     #belongs_to :user 
-    has_many :ordersofboxes
-    has_many :orders, through: :ordersofboxes
+    belongs_to :order
     scope :boxes_received, -> {where(received: true)}
  
     def add_item(item_id)
