@@ -41,6 +41,7 @@ class OrdersController < ApplicationController
 
     
         def show
+            binding.pry
             @order = Order.find(params[:id])
         end
 
@@ -69,8 +70,21 @@ class OrdersController < ApplicationController
             redirect_to orders_path
         end
 
+        def toggle_cancellation
+            @order = Order.find(params[:id])
+            if @order.cancellation?
+              @order.cancellation= false
+            else
+              @order.cancellation= true
+              redirect_to boxes_path
+            end
+        end
+
         private
         def order_params
-            params.require(:order).permit(:first_name, :last_name, :email, :id, :subscription_id, :subscription, :user_id)
+            params.require(:order).permit(:first_name,
+            :last_name, :email, :id,
+            :subscription_id, :subscription,
+            :user_id, :item_ids)
         end
 end

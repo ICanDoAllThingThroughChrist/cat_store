@@ -51,6 +51,16 @@ class SessionsController < ApplicationController
     end 
   end 
 
+  def set_order
+    case @order  
+      when @order != nil
+        Order.find(session[:order_id])
+      when @order == nil 
+        @order = Order.create 
+        session[:order_id] = @box.id 
+    end 
+  end
+
   protected 
     def authorize
         unless User.find_by_id(session[:user_id]) 

@@ -1,10 +1,15 @@
    <h1>Boxes</h1>
-        <%= link_to "New Box", new_box_path %>
-        <div id="Boxes">
-          <% @boxes.each do |box| %>
-            <div class="well well-sm">
-              <h2>Box Title: <%= link_to box.title, box %></h2>
-              <p>Year: <%= box.year %></p>
-              <p>Month: <%= box.month %></p>
+        <h4><%= link_to "New Box", new_box_path %></h4>
+        <div>
+        <% @userboxes.each do |userbox| %>
+        <% userboxid= userbox.id%>
+        <%# binding.pry %>
+        <% id = userbox.order.id %>
+        <fieldset>
+        <p>Order ID:<%=link_to "#{id}", order_path(userbox) %></p>
+        <p>Box ID:<%= userboxid %> </p>
+        <p>Title: <%=link_to "#{userbox.title}", box_path(userbox) %></p>
+        </fieldset>
+        <% end %>
+        <%#binding.pry%>
         </div>
-          <% end %>

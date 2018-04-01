@@ -8,7 +8,18 @@ class BoxesController < ApplicationController
     #rescue_from ActiveRecord::RecordNotFound, with: :invalid_box
     #skip_before_filter :authorize, :only => [:index, :show]
     def index
-        @boxes = Box.all
+        @user= current_user 
+        @userorders= []
+        @userboxes= []
+        @user.orders.each do |order|
+            @userorders << order 
+          order.boxes.each do |box|
+            @userboxes << box
+          end 
+        end
+        @userboxes
+        @userorders
+        #binding.pry
         # authorize! :index, @box
     end
     def new 
@@ -22,21 +33,30 @@ class BoxesController < ApplicationController
                 @box.items.build
             end
             @item = Item.all
+            #@item = Item.pluck(:title).uniq
+            
     end
     def create 
         binding.pry
         @item = Item.all
         #binding.pry
         #because once again load_resource takes care of this for us.
-        @box = Box.new(box_params)  
+        @box = Box.new(box_params) 
+        @user = current_user
+        @box.user_id= @user
+        @order = current_user.orders.last 
+        @user.orders.push @order 
+        @order2= @user.orders.last
+        binding.pry
+        @order2.boxes.push @box
         binding.pry
         if current_user#e.g. subscriber
             if @box.save 
                 #binding.pry
-                @user = current_user
+                #@user = current_user
                 #binding.pry
                 @user.subscriber= true #after_action assigns user to be a subscriber
-                #binding.pry
+                binding.pry
                 flash[:notice] = "Box has been created."
                 redirect_to @box 
             else
@@ -70,7 +90,7 @@ class BoxesController < ApplicationController
         @box = Box.find(params[:id])
         @box.destroy
         flash[:notice] = "box has been deleted."
-        redirect_to boxes_path
+        redirect_to root# to be determined
     end
     #As a subscriber I want to see what boxes i received
     def boxes_received
@@ -104,6 +124,8 @@ private
         @boxes = Box.accessible_by(current_ability).order('created_at DESC')
       end
     def box_params
-        params.require(:box).permit(:user_id, :subscription_level,:month,:year,:title, item_ids:[], items_attributes: [:title])
+        params.require(:box).permit(:shipped, :order_id,
+        :user_id, :subscription_level,:month,
+        :year,:title, item_ids:[], items_attributes: [:title])
     end
 end

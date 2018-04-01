@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180331135620) do
+ActiveRecord::Schema.define(version: 20180401111429) do
 
   create_table "box_items", force: :cascade do |t|
     t.integer "box_id"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20180331135620) do
     t.integer "user_id"
     t.integer "subscriber_box_id"
     t.boolean "received"
+    t.integer "order_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -53,6 +54,8 @@ ActiveRecord::Schema.define(version: 20180331135620) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
+    t.integer "quantity"
+    t.boolean "cancellation"
   end
 
   create_table "ordersofboxes", force: :cascade do |t|

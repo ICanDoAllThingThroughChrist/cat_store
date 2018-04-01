@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   resources :subscriptions
   # resources :users, only: [:show, :index] do 
   resources :orders
-    # 
+  get '/orders/:id' => 'orders#toggle_cancellation', :as => 'cancel_order'
+  post '/orders/:id', to: 'orders#toggle_cancellation'
   # end
-  root "boxes#index"
+  root "sessions#new"
   
   resources :boxes do 
     resources :items 
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout' => 'sessions#destroy', :as => 'logout'
   get '/signup' => 'users#new', :as => 'signup'
+
   resources :users
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :account_activations, only: [:edit]

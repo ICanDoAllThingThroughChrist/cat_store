@@ -1,6 +1,6 @@
 class BoxItem < ApplicationRecord
-    belongs_to :box 
-    belongs_to :item
+    belongs_to :box, touch:true  
+    belongs_to :item, touch:true 
     # belongs_to :item
     # attr_accessor :quantity
     # attr_writer :quantity 

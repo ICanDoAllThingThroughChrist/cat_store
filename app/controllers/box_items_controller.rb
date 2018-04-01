@@ -1,5 +1,4 @@
 class BoxItemsController < ApplicationController
-    include CurrentBox
     before_action :set_box, only: [:create]
     before_action :set_box_item, only: [:show, :edit, :update, :destroy]
       # GET /line_items/new
@@ -9,6 +8,8 @@ class BoxItemsController < ApplicationController
     
   def create
         @box = set_box
+        @order = set_order#i think
+        @box.build_order(@order)#i think
         item = Item.find(params[:item_id])
         @box_item = @box.add_item(item)
         if @box_item.save

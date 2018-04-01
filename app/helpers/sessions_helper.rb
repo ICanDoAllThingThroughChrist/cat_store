@@ -56,4 +56,26 @@ module SessionsHelper
         log_out if logged_in? 
         redirect_to root_url 
     end
+
+    private 
+
+  def set_box
+    case @box  
+      when @box != nil
+        Box.find(session[:box_id])
+      when @box == nil 
+        @box = Box.create 
+        session[:box_id] = @box.id 
+    end 
+  end 
+
+  def set_order
+    case @order  
+      when @order != nil
+        Order.find(session[:order_id])
+      when @order == nil 
+        @order = Order.create 
+        session[:order_id] = @order.id 
+    end 
+  end
 end

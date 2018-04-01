@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
     flash[:error] = "Access denied!"
     redirect_to root_url
   end
+
+  
   #check_authorization  if: :admin_subdomain?
 
   # private
