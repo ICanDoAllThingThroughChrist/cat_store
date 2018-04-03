@@ -1,7 +1,7 @@
 class BoxesController < ApplicationController
-    #include CurrentBox
+    # include CurrentBox
     include SessionsHelper
-    #before_action :set_box, only: [:show, :edit, :update, :destroy]
+    # before_action :set_box, only: [:show, :edit, :update, :destroy]
     # before_action :load_boxes, only: :index
     # load_and_authorize_resource
     # skip_authorization_check
@@ -18,7 +18,8 @@ class BoxesController < ApplicationController
           end 
         end
         @userboxes
-        @userorders
+        @userorders = Box.paginate :page =>params[:page], :order=>'created_at desc',
+        :per_page => 10
         #binding.pry
         # authorize! :index, @box
     end
@@ -50,7 +51,7 @@ class BoxesController < ApplicationController
         binding.pry
         @order2.boxes.push @box
         binding.pry
-        if current_user#e.g. subscriber
+        if current_user#e.g. subscriber only!
             if @box.save 
                 #binding.pry
                 #@user = current_user
@@ -63,7 +64,7 @@ class BoxesController < ApplicationController
                 flash[:alert] = "Box has not been created."
                 render "new"
             end
-        else 
+        else #e.g. is a visitor only!
             flash[:alert] = "please sign up for subscription And log in as subscriber to create a box"
             redirect_to login_url
         end
@@ -103,15 +104,7 @@ class BoxesController < ApplicationController
             end 
         end 
     end 
-    def manual_ship
-        if current_user.admin?
-            @users = User.find_by_sql(select: User, where: subscriber == true)
-            @boxes = Box.find_by_sql(select: Box, where: shipped == true)
-    end
-    #As an administrator I want to be able to manually
-    # ship a box (when I click the “ship” button on the
-    # box it adds it to the history for all current 
-    #subscribers - but not subscribers who have cancelled)
+
 
 end
 

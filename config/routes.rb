@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   # resources :subscriber_boxes
+  get 'admin' => 'admin#index'
   resources :subscriptions
   # resources :users, only: [:show, :index] do 
   resources :orders

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     before_action :admin_user, only: :destroy
     #https://stackoverflow.com/questions/23585871/implementing-multiple-user-roles
     def index 
-        @users = User.all
+        @users = User.order(:last_name)
     end 
     def show 
         @user = User.find(params[:id])

@@ -9,8 +9,6 @@ class User < ApplicationRecord
     validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-    #has_many :user_subscriptions
-    #has_many :subscriptions, through: :user_subscriptions
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }
     has_many :orders
@@ -18,15 +16,15 @@ class User < ApplicationRecord
     has_many :boxes 
     has_many :orders_of_boxes, :through => :boxes, :source => :subscriber_boxes
     belongs_to :role
-    # def role_name=(name)
-    #     self.role= Role.find_by(name: name)
-    #     binding.pry
-    # end 
+    #  def role_name=(name)
+    #      self.role= Role.find_by(name: name)
+    #      binding.pry
+    #  end 
 
-    # def self.role_name 
-    #     self.role.name
-    #     binding.pry  
-    # end 
+    #  def self.role_name 
+    #      self.role.name
+    #      binding.pry  
+    #  end 
     def create_current_box 
         new_box = boxes.create 
         self.current_cart_id = new_cart.id 
