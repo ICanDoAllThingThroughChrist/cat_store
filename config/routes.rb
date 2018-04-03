@@ -3,11 +3,14 @@ Rails.application.routes.draw do
   get 'admin' => 'admin#index'
   resources :subscriptions
   # resources :users, only: [:show, :index] do 
-  resources :orders
-  get '/orders/:id' => 'orders#toggle_cancellation', :as => 'cancel_order'
+  resources :orders #:as => 'orders_of_subscription'
+  get '/orders/:id' => 'orders#toggle_cancellation', :as => 'cancel_subscription'
   post '/orders/:id', to: 'orders#toggle_cancellation'
+
+  get '/orders/boxes/:id' => 'admin#manual_ship', :as => 'subscriber_boxes_shipped'
+  post '/orders/boxes/:id' => 'admin#manual_ship'
   # end
-  root "sessions#new"
+  root 'sessions#new'
   
   resources :boxes do 
     resources :items 
