@@ -46,7 +46,7 @@ gem 'carrierwave', '~> 0.11.2'
 gem 'mini_magick', '~> 4.8'
 gem "pundit"
 gem "rolify"
-gem 'cancancan', '~> 2.0'
+#gem 'cancancan', '~> 2.0'
 gem 'bootstrap-sass'
 gem 'will_paginate', '>= 3.0.pre'
 #https://github.com/CanCanCommunity/cancancan/wiki/Role-Based-Authorization

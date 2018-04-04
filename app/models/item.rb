@@ -7,6 +7,14 @@ class Item < ApplicationRecord
     validate :image_size
 
     before_destroy :ensure_not_referenced_by_any_box_item
+    def box_name=(name)
+        self.box = Box.find_or_create_by(title: title)
+      end
+    
+      def box_name
+         self.box.name
+      end
+    
     private 
     def ensure_not_referenced_by_any_box_item
         unless :box_items.empty? 

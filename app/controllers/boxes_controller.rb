@@ -1,12 +1,8 @@
 class BoxesController < ApplicationController
     # include CurrentBox
     include SessionsHelper
-    # before_action :set_box, only: [:show, :edit, :update, :destroy]
-    # before_action :load_boxes, only: :index
-    # load_and_authorize_resource
-    # skip_authorization_check
-    #rescue_from ActiveRecord::RecordNotFound, with: :invalid_box
-    #skip_before_filter :authorize, :only => [:index, :show]
+    before_action :admin, only => [:create, ]
+   
     def index
         @user= current_user 
         @userorders= []
@@ -23,6 +19,15 @@ class BoxesController < ApplicationController
         #binding.pry
         # authorize! :index, @box
     end
+
+    def show
+        #/boxes/1/items should show all of the items 
+        #in box #1 to anyone who wants to see it 
+        #means no current_user
+        @box = Box.find(params[:id])
+        #binding.pry
+    end
+
     def new 
             @user = current_user
             binding.pry
@@ -39,6 +44,9 @@ class BoxesController < ApplicationController
     end
     def create 
         binding.pry
+        #boxes/1/items/new should allow an 
+        #administrator to add a new item to a box.
+        #=>before_action :admin, only => [:create]
         @item = Item.all
         #binding.pry
         #because once again load_resource takes care of this for us.
@@ -68,10 +76,6 @@ class BoxesController < ApplicationController
             flash[:alert] = "please sign up for subscription And log in as subscriber to create a box"
             redirect_to login_url
         end
-    end
-    def show
-        @box = Box.find(params[:id])
-        #binding.pry
     end
     def edit
        @box = Box.find(params[:id])
@@ -117,6 +121,12 @@ private
         @boxes = Box.accessible_by(current_ability).order('created_at DESC')
       end
     def box_params
+        #- As an administrator I want 
+        #to be able to create a new box 
+        #(subscription level, 
+        #month and year to uniquely identify it 
+        #and a title for the theme e.g. 
+        #“cat coolers for summer”)
         params.require(:box).permit(:shipped, :order_id,
         :user_id, :subscription_level,:month,
         :year,:title, item_ids:[], items_attributes: [:title])

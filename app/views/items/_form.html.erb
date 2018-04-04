@@ -10,7 +10,6 @@
     </ul>
     </div>
     <% end %>
-<p>
 <%= f.label :title %>
 <%= f.text_field :title%>
 <%= f.label :description %>
@@ -19,7 +18,19 @@
 <%= image_tag(item.image_url) if item.image? %>
 <%= f.file_field :image, accept: 'image/jpeg, image/gif, image/png' %>
 <%= f.hidden_field :image_cache %>
-</p>
+<%= f.label "Select Box"%><br>
+<div class="form-group">
+<label>Box</label>
+<select name="item[box_ids][]" id="item_box_ids">
+        <% @boxes.each_with_index do |index,box| %>
+        <%# binding.pry %>
+        <%#https://stackoverflow.com/questions/48285481/how-do-you-use-a-single-select-dropdown-with-rails-has-many-through-association%>
+            <option value="<%= index[1] %>">
+                <%= index [0] %>
+            </option>
+        <% end %>
+</select>
+</div>
 <%= f.submit %>
 <% end %>
 <script type="text/javascript">

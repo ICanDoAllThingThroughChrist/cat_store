@@ -2,9 +2,12 @@ module SessionsHelper
     # Filter method to enforce a login requirement
     # Apply as a before_action on any controller you want to protect
     # helper_method :current_user
+    def admin
+        current_user.role_id= 9 
+    end 
     
     def subscriber 
-        curren_user.subscriber= true
+        curren_user.role_id= 8
     end 
     def authenticate
     logged_in? || access_denied

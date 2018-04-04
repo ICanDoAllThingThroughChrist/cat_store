@@ -9,7 +9,7 @@ class AdminController < ApplicationController
             #it to the history for all current 
             # subscribers - but not subscribers who have cancelled)
           @boxes = Box.find_by_sql(["select * from boxes where shipped = ?",
-                                    shipped = true])
+                                    shipped = false])
       end
     end
      #As an administrator I want to be able to manually
