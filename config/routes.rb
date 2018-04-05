@@ -6,9 +6,7 @@ Rails.application.routes.draw do
   resources :orders #:as => 'orders_of_subscription'
   get '/orders/:id' => 'orders#toggle_cancellation', :as => 'cancel_subscription'
   post '/orders/:id', to: 'orders#toggle_cancellation'
-
-  get '/orders/boxes/:id' => 'admin#manual_ship', :as => 'boxes_to_be_shipped'
-
+  get '/orders/boxes' => 'admin#manual_ship', :as => 'boxes_to_be_shipped'
   # end
   root 'sessions#new'
   resources :items
