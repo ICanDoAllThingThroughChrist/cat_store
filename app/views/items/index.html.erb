@@ -7,7 +7,7 @@
             <p>Image: <%= image_tag(item.image) %></p>
             <p>Size: <%= item.size %></p>
             <p>URL: <%= item.URL %></p>
-            <% if user.admin? %>
+            <% if admin %>
             <%#!--As an administrator I want to be able to
             add a new item to a box" (title, description, image, size, URL 
             to buy more from amazon or other partners)%>

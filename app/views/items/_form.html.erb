@@ -10,19 +10,20 @@
     </ul>
     </div>
     <% end %>
-<%= f.label :title %>
-<%= f.text_field :title%>
-<%= f.label :description %>
-<%= f.text_field :description%>
-<%= f.label :image %>
-<%= image_tag(item.image_url) if item.image? %>
-<%= f.file_field :image, accept: 'image/jpeg, image/gif, image/png' %>
+<%= f.label :title %><br>
+<%= f.text_field :title%><br>
+<%= f.label :description %><br>
+<%= f.text_field :description%><br>
+<%= f.label :URL%><br>
+<%= f.text_field :URL%><br>
+<%= f.label :image %><br>
+<%= image_tag(item.image_url) if item.image? %><br>
+<%= f.file_field :image, accept: 'image/jpeg, image/gif, image/png' %><br>
 <%= f.hidden_field :image_cache %>
 <%= f.label "Select Box"%><br>
 <div class="form-group">
-<label>Box</label>
 <select name="item[box_ids][]" id="item_box_ids">
-        <% @boxes.each_with_index do |index,box| %>
+        <% @boxes.each_with_index do |index,box| %><br>
         <%# binding.pry %>
         <%#https://stackoverflow.com/questions/48285481/how-do-you-use-a-single-select-dropdown-with-rails-has-many-through-association%>
             <option value="<%= index[1] %>">
@@ -33,6 +34,7 @@
 </div>
 <%= f.submit %>
 <% end %>
+
 <script type="text/javascript">
 $('#item_image').bind('change', function() {
     var size_in_megabytes = this.files[0].size/1024/1024;

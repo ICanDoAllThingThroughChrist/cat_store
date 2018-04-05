@@ -1,7 +1,7 @@
 class BoxesController < ApplicationController
     # include CurrentBox
     include SessionsHelper
-    before_action :admin, only => [:create, ]
+    before_action :admin, only => [:create, :update]
    
     def index
         @user= current_user 
@@ -59,7 +59,8 @@ class BoxesController < ApplicationController
         binding.pry
         @order2.boxes.push @box
         binding.pry
-        if current_user#e.g. subscriber only!
+        #e.g. admin only! subscriber only needs to know where "see nav link"
+        if admin
             if @box.save 
                 #binding.pry
                 #@user = current_user
@@ -73,7 +74,7 @@ class BoxesController < ApplicationController
                 render "new"
             end
         else #e.g. is a visitor only!
-            flash[:alert] = "please sign up for subscription And log in as subscriber to create a box"
+            flash[:alert] = "please sign up for subscription And log in as admin to create a box"
             redirect_to login_url
         end
     end
@@ -82,14 +83,20 @@ class BoxesController < ApplicationController
         # authorize! :edit, @box
     end
     def update 
-        @box = Box.find(params[:id])
-        if @box.update(box_params)
-            flash[:notice] = "box has been updated."
-            redirect_to @box
-        else
-            flash.now[:alert] = "box has not been updated."
-            render "edit"
+        if admin
+            @box = Box.find(params[:id])
+            if @box.update(box_params)
+                flash[:notice] = "box has been updated."
+                redirect_to @box
+            else
+                flash.now[:alert] = "box has not been updated."
+                render "edit"
+            end
+        else #e.g. is a visitor only!
+            flash[:alert] = "please sign up for subscription And log in as admin to create a box"
+            redirect_to login_url
         end
+
     end 
     def destroy
         @box = Box.find(params[:id])
