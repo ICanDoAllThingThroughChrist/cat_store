@@ -1,0 +1,7 @@
+<% @subscriber_users_boxes.each do |box|%>
+<% boxid = box.id %>
+<p>Box ID <%= "#{boxid}" %></p>
+<p>Box Updated at:<%= "#{box.updated_at}" %></p>
+<p>Box Created at:<%= "#{box.created_at}" %></p>
+<p>Box Subscription Level:<%= "#{box.subscription.level}"%></p>
+<% end %>

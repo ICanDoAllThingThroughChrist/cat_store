@@ -9,7 +9,6 @@ Rails.application.routes.draw do
 
   get '/orders/boxes/:id' => 'admin#manual_ship', :as => 'boxes_to_be_shipped'
 
-  post '/orders/boxes/:id' => 'admin#manual_ship'
   # end
   root 'sessions#new'
   resources :items

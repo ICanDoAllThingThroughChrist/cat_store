@@ -6,7 +6,9 @@ class SubscriptionsController < ApplicationController
             @subscription = Subscription.find(params[:id])
         end
         def new
-            #As a visitor I want to be able to purchase a subscription
+            #As a visitor I want to be able to 
+            #purchase a subscription
+            #just ask for first name, last name and email 
             @subscription = Subscription.new 
         end
         def create

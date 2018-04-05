@@ -4,16 +4,19 @@ class AdminController < ApplicationController
       @total_orders = Order.count
     end
     def manual_ship
-      if current_user.admin?
-          @subscriber_users = User.where("role_id == 8")
+      if admin
+          @subscriber_users_boxes = User.where("role_id == 8") && Order.where("cancellation = ?", cancellation = false) && Box.find_by_sql(["select * from boxes where shipped = ?",
+            shipped = false])
             #it to the history for all current 
-            # subscribers - but not subscribers who have cancelled)
-          @boxes = Box.find_by_sql(["select * from boxes where shipped = ?",
-                                    shipped = false])
+            #subscribers - 
+            #but not subscribers 
+            #who have cancelled)
       end
     end
-     #As an administrator I want to be able to manually
-    # ship a box (when I click the “ship” button on the
-    # box it adds it to the history for all current 
-    # subscribers - but not subscribers who have cancelled)
+    #As an administrator I want to be able to manually
+    #ship a box (when I click the “ship” button on the 
+    #Response:(an order belongs to a box and belongs to a user
+    #Response:therefore, there is only 1 user per box)
+    #box it adds it to the history("of the box") for all current 
+    #subscribers - but not subscribers who have cancelled)
 end
