@@ -4,11 +4,16 @@
     <h4> You are not logged in </h4>
     <li><%= link_to "Sign up", new_user_path %></li>
     <li><%= link_to "Log in", login_path %></li>
-<% else %>
+<% elsif current_user.role_id == 8 %>
     <li><%= link_to "Subscriptions Index and Description", subscriptions_path%></li>
     <li><%= link_to "New Subscription Order", new_order_path %></li>
     <li><%= link_to "My Subscription Orders", orders_path %></li>
     <li><%= link_to "Box Index and New Box", boxes_path %></li>
+    <li><%= link_to "Sign Out", logout_path %></li>
+<% elsif current_user.role_id == 9 %>
+    <li><%= link_to "Admin Index", admin_path %></li>
+    <li><%= link_to "Boxes Index to Ship Boxes", boxes_path%></li>
+    <li><%= link_to "Add_New_Items to Box", new_item_path %></li>
     <li><%= link_to "Sign Out", logout_path %></li>
 <% end %>
 </fieldset>
