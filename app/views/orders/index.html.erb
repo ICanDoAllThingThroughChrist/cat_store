@@ -1,8 +1,7 @@
 <% binding.pry %>
-   <h1>Subscriptions</h1>
-        <div id="subscriptions">
-          <% @subscriptions.each do |subscription| %>
-            <div class="well well-sm">
-              <h2>subscription level: <%= link_to subscription.level, subscription %></h2>
+   <h1>Orders</h1>
+        <div>
+          <% @orders.each do |order| %>
+              <h2>ID: <%= link_to order.id, order %></h2>
         </div>
           <% end %>

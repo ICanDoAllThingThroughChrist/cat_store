@@ -3,11 +3,12 @@
         <div>
         <% @userboxes.each do |userbox| %>
         <% userboxid= userbox.id%>
-        <%# binding.pry %>
-        <% id = userbox.order.id %>
+        <% order_id= userbox.order.id %>
+        <% userid= userbox.user_id %>
         <fieldset>
-        <p>Order ID:<%=link_to "#{id}", order_path(userbox) %></p>
-        <p>Box ID:<%= userboxid %> </p>
+        <p>User ID: <%= userid %>
+        <p>Order ID:<%=link_to "#{order_id}", order_path(order_id) %></p>
+        <p>Box ID:<%= link_to "#{userboxid}", box_path(userboxid) %> </p>
         <p>Title: <%=link_to "#{userbox.title}", box_path(userbox) %></p>
         </fieldset>
         <% end %>

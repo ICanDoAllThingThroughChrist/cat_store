@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   #skip_before_filter :authorize
-  skip_authorization_check
+  #skip_authorization_check
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     #binding.pry

@@ -16,12 +16,12 @@ class Item < ApplicationRecord
       end
     
     private 
-    def ensure_not_referenced_by_any_box_item
-        unless :box_items.empty? 
-            errors.add(:base, 'Box Items present') 
-            throw :abort 
-        end 
-    end 
+    # def ensure_not_referenced_by_any_box_item
+    #     unless :box_items.empty? 
+    #         errors.add(:base, 'Box Items present') 
+    #         throw :abort 
+    #     end 
+    # end 
 
     def image_size 
         if image.size > 5.megabytes 

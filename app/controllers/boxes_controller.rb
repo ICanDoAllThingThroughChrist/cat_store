@@ -1,23 +1,25 @@
 class BoxesController < ApplicationController
     # include CurrentBox
     include SessionsHelper
-    before_action :admin, only => [:create, :update]
+    before_action :admin, :only => [:create, :update]
    
     def index
         @user= current_user 
+        binding.pry
         @userorders= []
         @userboxes= []
+        binding.pry
+        @user_boxes = Box.find_by_sql ["SELECT title FROM Boxes WHERE user_id = ?", @user.id]
+        @user_orders = Order.find_by_sql ["SELECT id FROM Orders WHERE user_id = ?",@user.id]
         @user.orders.each do |order|
             @userorders << order 
+            binding.pry
           order.boxes.each do |box|
             @userboxes << box
           end 
         end
         @userboxes
-        @userorders = Box.paginate :page =>params[:page], :order=>'created_at desc',
-        :per_page => 10
-        #binding.pry
-        # authorize! :index, @box
+        @userorders = Box.order(:title).paginate(page: params[:page], per_page: 10)
     end
 
     def show
@@ -33,7 +35,9 @@ class BoxesController < ApplicationController
             binding.pry
             #@box = @user.boxes.build
             #@box = set_box
-            @box = Box.new
+            #@user.boxes.build
+            binding.pry
+            @box = @user.boxes.build
             #authorize! :new, @box
              3.times do
                 @box.items.build
@@ -52,7 +56,7 @@ class BoxesController < ApplicationController
         #because once again load_resource takes care of this for us.
         @box = Box.new(box_params) 
         @user = current_user
-        @box.user_id= @user
+        @box.user_id= params[:box][:user_id]
         @order = current_user.orders.last 
         @user.orders.push @order 
         @order2= @user.orders.last
@@ -116,9 +120,6 @@ class BoxesController < ApplicationController
         end 
     end 
 
-
-end
-
 private
     def invalid_box
     logger.error "Attempt to access invalid box #{params[:id]}"
@@ -134,8 +135,10 @@ private
         #month and year to uniquely identify it 
         #and a title for the theme e.g. 
         #“cat coolers for summer”)
-        params.require(:box).permit(:shipped, :order_id,
+        params.require(:box).permit(
+        :shipped, :order_id,
         :user_id, :subscription_level,:month,
-        :year,:title, item_ids:[], items_attributes: [:title])
+        :year,:title, item_ids:[],
+        items_attributes: [:title])
     end
 end

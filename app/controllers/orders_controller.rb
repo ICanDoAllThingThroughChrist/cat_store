@@ -1,9 +1,11 @@
 class OrdersController < ApplicationController
         
         def index
+            if current_user
             binding.pry
-            @subscriptions = Subscription.all 
+            @orders = Order.find_by_sql ["SELECT id FROM Orders WHERE user_id = ?", current_user]
             binding.pry
+            end
         end
 
         def new
@@ -27,9 +29,9 @@ class OrdersController < ApplicationController
                 binding.pry
                 if @order.save
                     binding.pry
-                    flash[:notice]= "new order saved"
+                    flash[:notice]= "new subscription order saved"
                 else  
-                    flash[:notice]= "order not saved"
+                    flash[:notice]= "subscription order not saved"
                 end 
                 binding.pry
                 render "show"
@@ -72,10 +74,15 @@ class OrdersController < ApplicationController
 
         def toggle_cancellation
             @order = Order.find(params[:id])
-            if @order.cancellation?
-              @order.cancellation= false
-            else
+            if @order.cancellation == nil 
+                binding.pry
               @order.cancellation= true
+              @order.save
+              flash[:notice] = "Your subscription order has been marked cancelled"
+              redirect_to boxes_path
+            else
+              @order.cancellation= false
+              @order.save
               redirect_to boxes_path
             end
         end

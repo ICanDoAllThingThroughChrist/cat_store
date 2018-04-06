@@ -3,7 +3,7 @@ class Box < ApplicationRecord
     has_many :box_items, dependent: :destroy
     has_many :items, through: :box_items
     accepts_nested_attributes_for :items
-    #belongs_to :user 
+    belongs_to :user 
     belongs_to :order, touch: true
     scope :boxes_received, -> {where(received: true)}
  

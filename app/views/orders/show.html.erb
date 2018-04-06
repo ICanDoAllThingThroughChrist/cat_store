@@ -1,6 +1,7 @@
 <% orderid= "#{@order.id}" %>
 <%#binding.pry %>
 <h3>Subscription's Order_ID:<%= orderid %></h3>
+<% binding.pry %>
 <h3>Subscription's Order Cancellation Status: <%= "#{@order.cancellation}"%></h3>
-<%= button_to "cancel order of subscriptions", cancel_order_path(orderid) %>
+<%= button_to "cancel order of subscriptions", cancel_subscription_path(orderid) %>
 
