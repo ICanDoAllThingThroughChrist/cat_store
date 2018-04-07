@@ -1,28 +1,26 @@
 <fieldset>
 <%# binding.pry %>
-<%if logged_in? == false %>
-    <h4> You are not logged in </h4>
-    <li><%= link_to "Sign up", new_user_path %></li>
-    <li><%= link_to "Log in", login_path %></li>
-    <li><%= link_to "List of Subscriptions", subscriptions_path %></li>
-   <li><%= link_to "New Subscription Order", new_order_path %></li>
-<% else%>
-    <%subscriber= current_user.role_id == 8 %>
-    <% if subscriber %>
+  <%if logged_in? == false %>
+        <h4> You are not logged in </h4>
+        <li><%= link_to "Sign up", new_user_path %></li>
+        <li><%= link_to "Log in", login_path %></li>
+        <li><%= link_to "List of Subscriptions", subscriptions_path %></li>
+        <li><%= link_to "New Subscription Order", new_order_path %></li>
+    <%elsif current_user.role_id == 8 %>
+    <li><%= link_to "Purchase New Subscription", subscriptions_path%></li>
+    <li><%= link_to "My Subscription Orders", orders_path %></li>
+    <li><%= link_to "Purchase New Box", boxes_path %></li>
+     <li><%= link_to "My list of boxes", boxes_path %></li>
+    <li><%= link_to "Sign Out", logout_path %></li>
+    <%elsif current_user.role_id == 9 %>
+    <% #binding.pry %>
     <li><%= link_to "Subscriptions Index and Description", subscriptions_path%></li>
+    <li><%= link_to "New Subscription Order", new_order_path %></li>
     <li><%= link_to "My Subscription Orders", orders_path %></li>
     <li><%= link_to "Box Index and New Box", boxes_path %></li>
+    <li><%= link_to "Admin Index", admin_path %></li>
+    <li><%= link_to "Boxes Index to Ship Boxes", boxes_to_be_shipped_path%></li>
+    <li><%= link_to "Add_New_Items to Box", new_item_path %></li>
     <li><%= link_to "Sign Out", logout_path %></li>
-    <%admin= current_user.role_id == 9 %>
-    <% elsif admin %>
-        <li><%= link_to "Subscriptions Index and Description", subscriptions_path%></li>
-        <li><%= link_to "New Subscription Order", new_order_path %></li>
-        <li><%= link_to "My Subscription Orders", orders_path %></li>
-        <li><%= link_to "Box Index and New Box", boxes_path %></li>
-        <li><%= link_to "Admin Index", admin_path %></li>
-        <li><%= link_to "Boxes Index to Ship Boxes", boxes_to_be_shipped_path%></li>
-        <li><%= link_to "Add_New_Items to Box", new_item_path %></li>
-        <li><%= link_to "Sign Out", logout_path %></li>
     <% end %>
-<% end %>
 </fieldset>

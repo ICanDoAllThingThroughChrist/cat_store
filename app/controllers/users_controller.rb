@@ -9,15 +9,16 @@ class UsersController < ApplicationController
     end 
     def show 
         @user = User.find(params[:id])
+        redirect_to subscriptions_path
     end 
     
     def new 
         @user = User.new
-        #binding.pry
+            #binding.pry
     end 
 
     def create 
-        binding.pry
+        #binding.pry
         @user = User.new(user_params)
         if @user.save 
             UserMailer.account_activation(@user).deliver_now

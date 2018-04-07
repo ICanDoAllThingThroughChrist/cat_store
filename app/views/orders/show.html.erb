@@ -1,9 +1,8 @@
 <% orderid= "#{@order.id}" %>
 <%#binding.pry %>
 <h3>Subscription's Order_ID:<%= orderid %></h3>
-<% binding.pry %>
+<% #binding.pry %>
 <% local= @order.created_at %>
 <h3>Subscription is <%=local.strftime("Created on %m/%d/%Y at %I:%M%p")%>
-<h3>Subscription's Order Cancellation Status: <%= "#{@order.cancellation}"%></h3>
 <%= button_to "cancel order of subscriptions", cancel_subscription_path(orderid) %>
 

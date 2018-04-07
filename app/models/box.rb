@@ -27,27 +27,27 @@ class Box < ApplicationRecord
         boxes2= []
         boxes3= []
         item_attributes.each do |key, value|
-            if key == "0"#binding.pry
+            if key == "0"##binding.pry
                 if value[:title].present?
-                    #binding.pry#self?
+                    ##binding.pry#self?
                     new_item= Item.find_by(title: value[:title])
                     self.box_items                
-                    # binding.pry
+                    # #binding.pry
                     if new_item.present?
                         self.box_items.each {|i| 
                             if i.item_id == new_item.id
-                            binding.pry
+                            #binding.pry
                                 i.quantity +=1
                             end
                                             }
-                        binding.pry
+                        #binding.pry
                     elsif new_item.present? == false
                         new_item2= Item.create(title: value[:title])
                         self.box_items.build(item_id: new_item2.id)
-                        binding.pry
+                        #binding.pry
                        self.box_items.each {|i| boxes << i.item_id }
                     end
-                binding.pry
+                #binding.pry
                 end
             elsif key == "1"
                 if value[:title].present?
@@ -56,15 +56,15 @@ class Box < ApplicationRecord
                     if new_item.present?
                         self.box_items.each {|i| 
                             if i.item_id == new_item.id
-                            binding.pry
+                            #binding.pry
                                 i.quantity +=1
                             end
                                             }
-                        binding.pry
+                        #binding.pry
                     elsif new_item.present? == false
                         new_item2= Item.create(title: value[:title])
                         self.box_items.build(item_id: new_item2.id)
-                        binding.pry
+                        #binding.pry
                        self.box_items.each {|i| boxes2 << i.item_id }
                     end
                 end
@@ -75,26 +75,26 @@ class Box < ApplicationRecord
                     if new_item.present?
                         self.box_items.each {|i| 
                             if i.item_id == new_item.id
-                            binding.pry
+                            #binding.pry
                                 i.quantity +=1
                             end
                                             }
-                        binding.pry
+                        #binding.pry
                     elsif new_item.present? == false
                         new_item2= Item.create(title: value[:title])
                         self.box_items.build(item_id: new_item2.id)
-                        binding.pry
+                        #binding.pry
                        self.box_items.each {|i| boxes3 << i.item_id }
                     end
                 end
             end 
             boxes
-            binding.pry
+            #binding.pry
         end
-        #binding.pry
+        ##binding.pry
         boxes
         boxes2
         boxes3
-        binding.pry
+        #binding.pry
     end
 end

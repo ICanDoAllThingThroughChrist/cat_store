@@ -2,40 +2,40 @@ class OrdersController < ApplicationController
         
         def index
             if current_user
-            binding.pry
+            #binding.pry
             @orders = Order.find_by_sql ["SELECT id FROM Orders WHERE user_id = ?", current_user]
             end
             @orders_ordered = Order.order(:id).paginate(page: params[:page], per_page: 4)
-            binding.pry
+            #binding.pry
             #@subscriber_users_boxes = Box.order(:id).paginate(page: params[:page], per_page: 1)
         end
 
         def new
             @user = current_user
             @order = Order.new
-            binding.pry
+            #binding.pry
         end
 
         def create
-            binding.pry
+            #binding.pry
             if current_user 
-                #binding.pry
+                ##binding.pry
                 # @user = current_user
                 # @subscription= Subscription.find(params[:order][:subscription_id])
                 # @user.subscriptions.push @subscription
-                binding.pry
+                #binding.pry
                 @order = Order.new(order_params)
-                binding.pry
+                #binding.pry
                 @order.user_id= current_user.id        
                 #@user.subscriptions.orders.push @order
-                #binding.pry
+                ##binding.pry
                 if @order.save
-                    binding.pry
+                    #binding.pry
                     flash[:notice]= "new subscription order saved"
                 else  
                     flash[:notice]= "subscription order not saved"
                 end 
-                binding.pry
+                #binding.pry
                 render "show"
             else 
                 flash[:alert] = "please sign up and log in to purchase subscription order and to add boxes"
@@ -45,7 +45,7 @@ class OrdersController < ApplicationController
 
     
         def show
-            binding.pry
+            #binding.pry
             @order = Order.find(params[:id])
         end
 
@@ -54,7 +54,7 @@ class OrdersController < ApplicationController
         end
 
         def update 
-            binding.pry
+            #binding.pry
             if current_user 
                 @order = Order.find(params[:id])
                 if @order.update(order_params)
@@ -77,7 +77,7 @@ class OrdersController < ApplicationController
         def toggle_cancellation
             @order = Order.find(params[:id])
             if @order.cancellation == nil 
-                binding.pry
+                #binding.pry
               @order.cancellation= true
               @order.save
               flash[:notice] = "Your subscription order has been marked cancelled"

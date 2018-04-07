@@ -1,10 +1,10 @@
-<% binding.pry %>
+<% #binding.pry %>
 <%= form_for @subscription do |f| %>
 <% f.hidden_field @subscription.id %>
     <%= f.fields_for :visitorsubscriptions, @subscription.visitorsubscriptions.build do |visitor_subscription|%>
     <%= visitor_subscription.text_field :level%>
     <%= visitor_subscription.collection_select(:visitorsubscription, :subscription_id, Subscription.all.collect {|r| [r.level, r.id]}, {:include_blank => 'Choose a subscription level'} )%>
-    <% binding.pry %>
+    <% #binding.pry %>
     <% end %>
 <%= f.submit %>
 <% end %>

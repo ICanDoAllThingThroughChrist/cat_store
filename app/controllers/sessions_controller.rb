@@ -3,18 +3,18 @@ class SessionsController < ApplicationController
   #skip_authorization_check
   def create
     user = User.find_by(email: params[:session][:email].downcase)
-    #binding.pry
+    ##binding.pry
     if user && user.authenticate(params[:session][:password])
-      binding.pry
+      #binding.pry
       if user.activate
-          binding.pry
+          #binding.pry
           log_in user
           current_user
           params[:session][:remember_me] == '1' ? remember(user) : forget(user)
           redirect_to user
-          binding.pry
+          #binding.pry
       else
-        binding.pry
+        #binding.pry
           message = "account is not activated"
           message += "check your email for the activation link"
           flash[:danger] = message
@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out if logged_in?
-    binding.pry
+    ##binding.pry
     redirect_to root_url
   end
 

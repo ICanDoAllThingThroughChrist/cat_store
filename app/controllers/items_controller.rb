@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
         #https://stackoverflow.com/questions/48285481/how-do-you-use-a-single-select-dropdown-with-rails-has-many-through-association
     end
     def create
-        binding.pry
+        #binding.pry
         if current_user.role_id == admin
             @item = Item.new(item_params)
             if @item.save 
@@ -35,7 +35,7 @@ class ItemsController < ApplicationController
         @item = Item.find(params[:id])
     end
     def update 
-        binding.pry
+        #binding.pry
         @item = Item.find(params[:id])
         if @item.update(item_params)
             flash[:notice] = "item has been updated."

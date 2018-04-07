@@ -5,10 +5,10 @@ class BoxesController < ApplicationController
    
     def index
         @user= current_user 
-        binding.pry
+        # #binding.pry
         @userorders= []
         @userboxes= []
-        binding.pry
+        #binding.pry
         @user_boxes = Box.find_by_sql ["SELECT title FROM Boxes WHERE user_id = ?", @user.id]
         @user_orders = Order.find_by_sql ["SELECT id FROM Orders WHERE user_id = ?",@user.id]
         @user.orders.each do |order|
@@ -27,7 +27,7 @@ class BoxesController < ApplicationController
         #in box #1 to anyone who wants to see it 
         #means no current_user
         @box = Box.find(params[:id])
-        #binding.pry
+        ##binding.pry
     end
 
     def new 
@@ -44,12 +44,12 @@ class BoxesController < ApplicationController
             @item = Item.group(:title)
     end
     def create 
-        binding.pry
+        #binding.pry
         #boxes/1/items/new should allow an 
         #administrator to add a new item to a box.
         #=>before_action :admin, only => [:create]
         @item = Item.all
-        #binding.pry
+        ##binding.pry
         #because once again load_resource takes care of this for us.
         @box = Box.new(box_params) 
         @user = current_user
@@ -65,11 +65,10 @@ class BoxesController < ApplicationController
         #e.g. admin only! subscriber only needs to know where "see nav link"
         if admin
             if @box.save 
-                #binding.pry
+                ##binding.pry
                 #@user = current_user
-                #binding.pry
-                @user.subscriber= true #after_action assigns user to be a subscriber
-
+                ##binding.pry
+                @user.subscriber= true #after_action assigns user to be a subscribe
                 flash[:notice] = "Box has been created."
                 redirect_to @box 
             else
