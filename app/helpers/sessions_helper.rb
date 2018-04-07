@@ -3,6 +3,7 @@ module SessionsHelper
     # Apply as a before_action on any controller you want to protect
     # helper_method :current_user
     def admin
+        user_id = session[:user_id]
         @current_user ||= User.find_by(id: user_id)
         @current_user.role_id= 9 
         admin= @current_user.role_id= 9
@@ -11,8 +12,10 @@ module SessionsHelper
     
     def subscriber 
         binding.pry
+        user_id = session[:user_id]
         @current_user ||= User.find_by(id: user_id)
-        @curren_user.role_id= 8
+        subscriber= @curren_user.role_id= 8
+        subscriber
     end 
     def authenticate
     logged_in? || access_denied

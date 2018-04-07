@@ -12,6 +12,7 @@ class AdminController < ApplicationController
             #but not subscribers 
             #who have cancelled)
       end
+      @subscriber_users_boxes = Box.order(:id).paginate(page: params[:page], per_page: 1)
     end
     #As an administrator I want to be able to manually
     #ship a box (when I click the “ship” button on the 

@@ -1,3 +1,4 @@
-<h1>Welcome</h1>
-It's <%= Time.now %>
-We have <%= pluralize(@total_orders, "order") %>
+<h1>Welcome:  <%="#{current_user.first_name}"%>!</h1>
+<% time= Time.now%>
+<h3><%= time.strftime("Time is %m/%d/%Y, at %I:%M%p")  %></h3>
+<h4>We have <%= pluralize(@total_orders, "order") %></h4>
