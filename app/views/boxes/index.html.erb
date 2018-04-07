@@ -2,14 +2,14 @@
         <h4><%= link_to "New Box", new_box_path %></h4>
         <div>
         <% @userboxes.each do |userbox| %>
-        <% userboxid= userbox.id%>
-        <% order_id= userbox.order.id %>
-        <% userid= userbox.user_id %>
+                <% userboxid= userbox.id%>
+                <% order_id= userbox.order.id %>
+                <% userid= userbox.user_id %>
         <fieldset>
-        <p>User ID: <%= userid %>
-        <p>Order ID:<%=link_to "#{order_id}", order_path(order_id) %></p>
-        <p>Box ID:<%= link_to "#{userboxid}", box_path(userboxid) %> </p>
-        <p>Title: <%=link_to "#{userbox.title}", box_path(userbox) %></p>
+                <p>User ID: <%= userid %>
+                <p>Order ID:<%=link_to "#{order_id}", order_path(order_id) %></p>
+                <p>Box ID:<%= link_to "#{userboxid}", box_path(userboxid) %> </p>
+                <p>Title: <%=link_to "#{userbox.title}", box_path(userbox) %></p>
         </fieldset>
         <% end %>
         <%#binding.pry%>

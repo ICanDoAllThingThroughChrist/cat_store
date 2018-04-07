@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
             end
             @orders_ordered = Order.order(:id).paginate(page: params[:page], per_page: 4)
             binding.pry
+            #@subscriber_users_boxes = Box.order(:id).paginate(page: params[:page], per_page: 1)
         end
 
         def new

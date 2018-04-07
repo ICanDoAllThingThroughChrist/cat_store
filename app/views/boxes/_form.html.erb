@@ -15,7 +15,7 @@
     <% end %>
 <p>
 <%= f.label :month %><br>
-<% select_list = {Jan: 1, Feb: 2,March: 3, April: 4, May: 5, June: 6 }%>
+<% select_list = {Jan: 1, Feb: 2,March: 3, April: 4, May: 5, June: 6, July: 7, Aug: 8, Sept: 9, Oct: 10, Nov: 11, Dec: 12 }%>
 <%= f.select :month, select_list%><br>
 <%= f.label :year %><br>
 <%= f.text_field :year%><br>
@@ -23,7 +23,7 @@
 <%= f.text_field :title%><br>
 <%= f.label :shipped %><%= f.check_box :shipped %><br>
 <%= f.label "Select Item"%><br>
-<%= f.collection_check_boxes :item_ids, @item, :id, :title %><br>
+<%= f.collection_check_boxes :item_ids, @item, :id, :title, prompt: true %><br>
 <%= f.fields_for :items do |item_fields| %>
 <%= item_fields.label :items_title %><br>
 <%= item_fields.text_field :title %><br>

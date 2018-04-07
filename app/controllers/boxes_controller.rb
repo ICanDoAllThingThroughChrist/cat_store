@@ -19,7 +19,8 @@ class BoxesController < ApplicationController
           end 
         end
         @userboxes
-        @userorders = Box.order(:title).paginate(page: params[:page], per_page: 10)
+        @userorders = Box.order(:id).paginate(page: params[:page], per_page: 2)
+        #@subscriber_users_boxes = Box.order(:id).paginate(page: params[:page], per_page: 1)
     end
 
     def show
@@ -42,9 +43,8 @@ class BoxesController < ApplicationController
              3.times do
                 @box.items.build
             end
-            @item = Item.all
-            #@item = Item.pluck(:title).uniq
-            
+            #@item = Item.all
+            @item = Item.group(:title)
     end
     def create 
         binding.pry
