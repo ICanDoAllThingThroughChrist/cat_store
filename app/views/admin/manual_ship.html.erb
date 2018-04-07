@@ -1,7 +1,10 @@
 <% @subscriber_users_boxes.each do |box|%>
 <% boxid = box.id %>
 <p>Box ID <%= "#{boxid}" %></p>
-<p>Box Updated at:<%= "#{box.updated_at}" %></p>
-<p>Box Created at:<%= "#{box.created_at}" %></p>
-<p>Box Subscription Level:<%= "#{box.subscription.level}"%></p>
+<% updated_at= Time.new("#{box.updated_at}")%>
+<p>Box Updated at:<%= updated_at.strftime("Updated on %m/%d/%Y, at %I:%M%p") %></p>
+<% created_at= Time.new("#{box.created_at}")%>
+<p>Box Created at:<%= created_at.strftime("Created on %m/%d/%Y, at %I:%M%p") %></p>
+<p>Box Subscription Level:<%= "#{box.subscription_level}"%></p>
+<p>Box Belongs To User ID: <%= "#{box.user_id}"%>
 <% end %>

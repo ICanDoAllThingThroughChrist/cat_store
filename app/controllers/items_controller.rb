@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
     end
     def create
         binding.pry
-        if admin
+        if current_user.role_id == admin
             @item = Item.new(item_params)
             if @item.save 
             flash[:notice] = "item has been created."
@@ -21,8 +21,10 @@ class ItemsController < ApplicationController
             else
             flash[:alert] = "item has not been created."
             render "new"
-            end 
-        end
+            end
+        else 
+            flash[:notice] = "You are not authorized to perform this action" 
+        end    
     end
     def show
         @item = Item.find(params[:id])

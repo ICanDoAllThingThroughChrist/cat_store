@@ -5,6 +5,8 @@ module SessionsHelper
     def admin
         @current_user ||= User.find_by(id: user_id)
         @current_user.role_id= 9 
+        admin= @current_user.role_id= 9
+        admin
     end 
     
     def subscriber 
