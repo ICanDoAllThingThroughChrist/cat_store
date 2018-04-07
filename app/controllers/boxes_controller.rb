@@ -13,7 +13,6 @@ class BoxesController < ApplicationController
         @user_orders = Order.find_by_sql ["SELECT id FROM Orders WHERE user_id = ?",@user.id]
         @user.orders.each do |order|
             @userorders << order 
-            binding.pry
           order.boxes.each do |box|
             @userboxes << box
           end 
@@ -33,11 +32,9 @@ class BoxesController < ApplicationController
 
     def new 
             @user = current_user
-            binding.pry
             #@box = @user.boxes.build
             #@box = set_box
             #@user.boxes.build
-            binding.pry
             @box = @user.boxes.build
             #authorize! :new, @box
              3.times do
@@ -57,12 +54,14 @@ class BoxesController < ApplicationController
         @box = Box.new(box_params) 
         @user = current_user
         @box.user_id= params[:box][:user_id]
-        @order = current_user.orders.last 
-        @user.orders.push @order 
-        @order2= @user.orders.last
-        binding.pry
-        @order2.boxes.push @box
-        binding.pry
+            if current_user.orders.last == nil
+                flash[:notice] = "please purchase an order to buy a box"
+            else
+                @order = current_user.orders.last
+                @user.orders.push @order 
+                @order2= @user.orders.last 
+                @order2.boxes.push @box
+            end
         #e.g. admin only! subscriber only needs to know where "see nav link"
         if admin
             if @box.save 
@@ -70,7 +69,7 @@ class BoxesController < ApplicationController
                 #@user = current_user
                 #binding.pry
                 @user.subscriber= true #after_action assigns user to be a subscriber
-                binding.pry
+
                 flash[:notice] = "Box has been created."
                 redirect_to @box 
             else
