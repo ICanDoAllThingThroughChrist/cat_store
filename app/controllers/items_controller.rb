@@ -7,7 +7,10 @@ class ItemsController < ApplicationController
     end
     def new
             @user= current_user
-            @boxes= @user.boxes.pluck(:title, :id)
+            #@boxes= @user.boxes.pluck(:title, :id)
+            @boxes= Box.pluck(:title, :id)
+            #@boxex= Box.group(:title).pluck(:title, :id)
+            #@boxes= Box.group(:title).where(:shipped == "false")
             @item = Item.new
         #https://stackoverflow.com/questions/48285481/how-do-you-use-a-single-select-dropdown-with-rails-has-many-through-association
     end
