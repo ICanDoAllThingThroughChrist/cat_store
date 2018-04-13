@@ -1,17 +1,18 @@
    <h1>Boxes</h1>
         <h4><%= link_to "New Box", new_box_path %></h4>
         <div>
-        <% @userboxes.each do |userbox| %>
-                <% userboxid= userbox.id%>
-                <% order_id= userbox.order.id %>
-                <% userid= userbox.user_id %>
+        <% @user_boxes.each do |user_box| %>
+                <% user_box_id= user_box.id%>
+                <% order_id= user_box.order.id %>
+                <% user_id= user_box.user_id %>
         <fieldset>
-                <p>User ID: <%= userid %>
+                <p>User ID: <%= user_id %>
                 <p>Order ID:<%=link_to "#{order_id}", order_path(order_id) %></p>
-                <p>Box ID:<%= link_to "#{userboxid}", box_path(userboxid) %> </p>
-                <p>Title: <%=link_to "#{userbox.title}", box_path(userbox) %></p>
+                <p>Box ID:<%= link_to "#{user_box_id}", box_path(user_box_id) %> </p>
+                <% binding.pry %>
+                <p>Title: <%=link_to "#{user_box.title}", box_path(user_box) %></p>
         </fieldset>
         <% end %>
         <%#binding.pry%>
         </div>
-        <p><%= will_paginate @userorders %><p>
+        <p><%= will_paginate @user_orders %><p>

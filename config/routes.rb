@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/admin/manual_ship' => 'admin#manual_ship', :as => 'boxes_to_be_shipped'
   # end
   root 'sessions#new'
-  resources :items
+  resources :items 
   resources :boxes do 
     resources :items 
   end

@@ -6,20 +6,15 @@ class BoxesController < ApplicationController
     def index
         @user= current_user 
         # #binding.pry
-        @userorders= []
-        @userboxes= []
-        #binding.pry
-        @user_boxes = Box.find_by_sql ["SELECT title FROM Boxes WHERE user_id = ?", @user.id]
-        @user_orders = Order.find_by_sql ["SELECT id FROM Orders WHERE user_id = ?",@user.id]
+        @user_boxes= []
         @user.orders.each do |order|
-            @userorders << order 
           order.boxes.each do |box|
-            @userboxes << box
+            #binding.pry
+            @user_boxes << box
           end 
         end
-        @userboxes
-        @userorders = Box.order(:id).paginate(page: params[:page], per_page: 2)
-        #@subscriber_users_boxes = Box.order(:id).paginate(page: params[:page], per_page: 1)
+        @user_boxes
+        @user_orders = Box.order(:id).paginate(page: params[:page], per_page: 1)
     end
 
     def show
@@ -121,7 +116,7 @@ class BoxesController < ApplicationController
 private
     def invalid_box
     logger.error "Attempt to access invalid box #{params[:id]}"
-    redirect_to boxes_ptah, flash[:notice]='invalid box'
+    redirect_to boxes_path, flash[:notice]='invalid box'
     end
     def load_boxes
         @boxes = Box.accessible_by(current_ability).order('created_at DESC')
