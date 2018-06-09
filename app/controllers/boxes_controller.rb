@@ -60,6 +60,7 @@ class BoxesController < ApplicationController
         #e.g. admin only! subscriber only needs to know where "see nav link"
         if admin
             if @box.save 
+                #@box.created_at = Time.now.strftime("%Y-%m-%d 00:00:00")
                 ##binding.pry
                 #@user = current_user
                 ##binding.pry

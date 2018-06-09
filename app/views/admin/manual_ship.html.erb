@@ -3,10 +3,8 @@
 <fieldset>
 <h3>Box Title:<%= "#{box.title}"%></h3>
 <p>Box ID <%= "#{boxid}" %></p>
-<% updated_at= Time.new("#{box.updated_at}")%>
-<p>Box Updated at:<%= updated_at.strftime("Updated on %m/%d/%Y, at %I:%M%p") %></p>
-<% created_at= Time.new("#{box.created_at}")%>
-<p>Box Created at:<%= created_at.strftime("Created on %m/%d/%Y, at %I:%M%p") %></p>
+<p>Box Updated at:<%= box.updated_at.strftime("%m/%d/%Y, at %I:%M%p") %></p>
+<p>Box Created at:<%= box.created_at.strftime("%m/%d/%Y, at %I:%M%p") %></p>
 <p>Box Belongs To User ID: <%= "#{box.user_id}"%>
 <%box.items.each do |item|%>
     <h4>item title:<%= "#{item.title}"%></h4>
