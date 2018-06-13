@@ -25,6 +25,16 @@ class SessionsController < ApplicationController
       render 'new'
     end     
   end
+  def facebook
+    @user = User.find_or_create_by(uid: auth['uid']) do |u|
+      u.name = auth['info']['name']
+      u.email = auth['info']['email']
+    end
+ 
+    session[:user_id] = @user.id
+ 
+    render 'layouts/application'
+  end
 
   def update
     id = params[:id].to_i
@@ -59,6 +69,10 @@ class SessionsController < ApplicationController
         @order = Order.create 
         session[:order_id] = @box.id 
     end 
+  end
+ 
+  def auth
+    request.env['omniauth.auth']
   end
 
   protected 

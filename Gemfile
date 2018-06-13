@@ -51,6 +51,11 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog-aws'
 gem 's3_direct_upload', '0.1.6'
+gem "omniauth-google-oauth2", "~> 0.2.1"
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'dotenv-rails'
+gem 'thin'
 #https://github.com/CanCanCommunity/cancancan/wiki/Role-Based-Authorization
 #https://www.sitepoint.com/image-processing-rails/
 end

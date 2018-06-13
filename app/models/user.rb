@@ -16,6 +16,7 @@ class User < ApplicationRecord
     has_many :boxes 
     has_many :orders_of_boxes, :through => :boxes, :source => :subscriber_boxes
     belongs_to :role
+    #user.url = auth_hash['info']['urls'][user.provider.capitalize]
     #  def role_name=(name)
     #      self.role= Role.find_by(name: name)
     #      binding.pry
@@ -80,6 +81,17 @@ class User < ApplicationRecord
         cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                       BCrypt::Engine.cost
         BCrypt::Password.create(string, cost: cost)
+    end
+
+    def self.from_omniauth(auth)
+        where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+          user.provider = auth.provider
+          user.uid = auth.uid
+          user.name = auth.info.name
+          user.oauth_token = auth.credentials.token
+          user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+          user.save!
+        end
     end
 
     private

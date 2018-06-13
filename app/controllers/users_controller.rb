@@ -30,7 +30,7 @@ class UsersController < ApplicationController
             #redirect_to @user 
         else 
             flash.now[:danger] = 'failed validations'
-            render 'login'
+            redirect_to login_url
         end 
     end 
 

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   # resources :subscriber_boxes
+
   get 'admin' => 'admin#index'
   resources :subscriptions
   # resources :users, only: [:show, :index] do 
@@ -20,9 +21,14 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout' => 'sessions#destroy', :as => 'logout'
   get '/signup' => 'users#new', :as => 'signup'
+  get '/auth/facebook/callback' => 'sessions#facebook'
 
   resources :users
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :account_activations, only: [:edit]
+  get 'auth/:provider/callback', to: 'sessions#google_create'
+  get 'auth/failure', to: redirect('/')
+  get 'signout', to: 'sessions#destroy', as: 'signout'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
