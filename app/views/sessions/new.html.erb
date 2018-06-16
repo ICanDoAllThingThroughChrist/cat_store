@@ -7,13 +7,12 @@
     <%= f.label :password %><br>
     <%= link_to "(forgot password)", new_password_reset_path %><br>
     <%= f.password_field :password %><br>
-
     <%= f.label :remember_me do %> <br>
     <%= f.check_box :remember_me %><span>Remember me on this computer</span><br>
     <% end %>
-    
     <%= f.submit "Log in" %><br>
     <% end %>
     <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    <p><%= link_to 'Log in with Facebook!', '/auth/facebook'%></p>
 </div>
 </fieldset>

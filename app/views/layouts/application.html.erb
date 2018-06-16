@@ -14,10 +14,10 @@
   </head>
 
   <body>
-  <%= render 'layouts/header' %>
+  <%= render 'layouts/header' %> 
   <% flash.each do |key, message| %>
   <div><%= message %></div>
   <% end %>
-    <%= yield %>
+    <%# <%= yield %>
   </body>
 </html>
