@@ -56,6 +56,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'dotenv-rails'
 gem 'thin'
+gem 'activerecord-suppress_range_error', '~> 0.1.0'
 #https://github.com/CanCanCommunity/cancancan/wiki/Role-Based-Authorization
 #https://www.sitepoint.com/image-processing-rails/
 end

@@ -26,17 +26,34 @@ class SessionsController < ApplicationController
     end     
   end
   def facebook
-    @user = User.find_or_create_by(uid: auth['uid']) do |u|
-      u.name = auth['info']['name']
-      u.email = auth['info']['email']
-      u.id = auth['uid']
+    if @user = User.where(uid: auth['uid']).first_or_create do |u|
+          u.name = auth['info']['name']
+          u.email = auth['info']['email']
+          binding.pry
+          u.password_digest = auth['info']['password']
+          u.id = auth['uid']
+        end
+        binding.pry
+        @user.save
+        session[:user_id]= @user.id
+        session[:email]= @user.email
+        session[:name]= @user.name
+        session[:uid]= @user.uid
+        current_user= @user 
+        log_in @user
+        @user.activate
+        render 'welcome/home'
       binding.pry
-    end
+      #   # Load the cart from the session, or create a new empty cart.
+      #   cart = session[:cart] || []
+      #   cart << @item.id
  
-    session[:user_id]= @user.id
-    #binding.pry
-    render 'layouts/application'
-    binding.pry
+      # # Save the cart in the session.
+      # session[:cart] = cart
+    else 
+        redirect_to root_url
+        binding.pry
+    end
   end
 
   def update

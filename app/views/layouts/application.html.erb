@@ -12,12 +12,13 @@
       <% end %>
       </title>
   </head>
-
   <body>
-  <%= render 'layouts/header' %> 
-  <% flash.each do |key, message| %>
-  <div><%= message %></div>
-  <% end %>
-    <%# <%= yield %>
+  <fieldset>
+    <%= render file: "/Users/charlielee/Development/cat_store/app/views/layouts/_header" %>
+  <fieldset>
+    <%= yield %>
+    <% flash.each do |key, message| %>
+    <div><%= message %></div>
+    <% end %>
   </body>
 </html>

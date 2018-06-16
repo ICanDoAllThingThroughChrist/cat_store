@@ -135,4 +135,7 @@ private
         :year,:title, item_ids:[],
         items_attributes: [:title])
     end
+    def current_user
+        @current_user= User.find_by_id(session[:user_id])
+    end
 end

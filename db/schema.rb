@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180610004900) do
+ActiveRecord::Schema.define(version: 20180616031600) do
 
   create_table "box_items", force: :cascade do |t|
     t.integer "box_id"
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 20180610004900) do
     t.integer "role_id"
     t.string "access_level"
     t.string "provider"
-    t.string "uid"
+    t.integer "uid", limit: 7
     t.string "name"
     t.string "oauth_token"
     t.datetime "oauth_expires_at"

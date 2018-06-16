@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
         
         def index
+            binding.pry
             if current_user
             #binding.pry
             @orders = Order.find_by_sql ["SELECT id FROM Orders WHERE user_id = ?", current_user]
@@ -11,13 +12,15 @@ class OrdersController < ApplicationController
         end
 
         def new
+            binding.pry
+            #@current_user = User.find_by_id(session[:user_id])
             @user = current_user
             @order = Order.new
             #binding.pry
         end
 
         def create
-            #binding.pry
+            binding.pry
             if current_user 
                 ##binding.pry
                 # @user = current_user
@@ -26,7 +29,7 @@ class OrdersController < ApplicationController
                 #binding.pry
                 @order = Order.new(order_params)
                 #binding.pry
-                @order.user_id= current_user.id        
+                @order.user_id= @current_user.id        
                 #@user.subscriptions.orders.push @order
                 ##binding.pry
                 if @order.save
@@ -37,7 +40,8 @@ class OrdersController < ApplicationController
                 end 
                 #binding.pry
                 render "show"
-            else 
+            else
+                binding.pry 
                 flash[:alert] = "please sign up and log in to purchase subscription order and to add boxes"
                 redirect_to login_url
             end 
@@ -55,6 +59,7 @@ class OrdersController < ApplicationController
 
         def update 
             #binding.pry
+            #@current_user= User.find_by_id(session[:user_id])
             if current_user 
                 @order = Order.find(params[:id])
                 if @order.update(order_params)
@@ -94,6 +99,9 @@ class OrdersController < ApplicationController
             params.require(:order).permit(:first_name,
             :last_name, :email, :id,
             :subscription_id, :subscription,
-            :user_id, :item_ids)
+            :user_id, :item_ids, :name)
+        end
+        def current_user
+            @current_user= User.find_by_id(session[:user_id])
         end
 end

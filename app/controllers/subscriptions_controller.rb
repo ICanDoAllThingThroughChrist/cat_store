@@ -1,6 +1,8 @@
 class SubscriptionsController < ApplicationController 
+    
         def index
             @subscriptions = Subscription.all
+            binding.pry
         end
         def show 
             @subscription = Subscription.find(params[:id])
@@ -13,6 +15,7 @@ class SubscriptionsController < ApplicationController
         end
         def create
             binding.pry
+            @subscription = Subscription.create(subscription_params)
             if @subscription.save 
               flash[:notice] = "subscription has been created."
               redirect_to @subscription 

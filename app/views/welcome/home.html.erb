@@ -1,0 +1,12 @@
+<% if session[:user_id] %>
+  <h1><%= @user.name %></h1>
+  <h2>Email: <%= @user.email %></h2>
+  <h2>Facebook UID: <%= @user.uid %></h2>
+<% else %>
+<h4> You are not logged in </h4>
+    <li><%= link_to "Sign up", new_user_path %></li>
+    <li><%= link_to "Log in", login_path %></li>
+    <li><%= link_to "List of Subscriptions", subscriptions_path %></li>
+    <li><%= link_to "New Subscription Order", new_order_path %></li>
+  <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+<% end %>
