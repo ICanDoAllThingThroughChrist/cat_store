@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
             #binding.pry
             @orders = Order.find_by_sql ["SELECT id FROM Orders WHERE user_id = ?", current_user]
             end
-            @orders_ordered = Order.order(:id).paginate(page: params[:page], per_page: 4)
+            @orders_ordered = Order.order(:id).paginate(page: params[:page], per_page: 5)
             #binding.pry
             #@subscriber_users_boxes = Box.order(:id).paginate(page: params[:page], per_page: 1)
         end
