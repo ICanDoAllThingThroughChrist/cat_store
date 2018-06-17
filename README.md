@@ -25,12 +25,12 @@ bundle install
 Contributing
 Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
 
-
 Author
 Charlie Lee
 
 License
 This project is licensed under the MIT License - see the LICENSE.md file for details
+https://github.com/ICanDoAllThingThroughChrist/cat_store/blob/master/LICENSE.md
 
 Acknowledgments
 
