@@ -64,8 +64,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out if logged_in?
-    ##binding.pry
+    session[:user_id]= nil
+    binding.pry
     redirect_to root_url
   end
 

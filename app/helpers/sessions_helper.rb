@@ -55,12 +55,14 @@ module SessionsHelper
 
     def logged_in?
         !current_user.nil? #current_user is not nil(aka not empty)
+        binding.pry
     end
 
     def log_out 
         forget(current_user)
         session.delete(:user_id)
-        @current_user = nil 
+        @current_user = nil
+        binding.pry 
     end
 
     def destroy 

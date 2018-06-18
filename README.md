@@ -19,8 +19,26 @@ To meet the nested resource requirements /boxes/1/items should show all of the i
 
 Installation guide 
 fork and clone repo https://github.com/ICanDoAllThingThroughChrist/cat_store
-migrate db 
-bundle install
+
+Create your feature or improvement branch:
+
+$ git checkout -b new-feature
+
+Install runtime dependencies:
+
+$ bundle install
+
+Fix mistakes or improve, 
+
+You should open http://localhost:3000 in your browser, and make sure your changes.
+Then commit:
+
+$ git commit -am 'add some new feature'
+Push your banch to your forked brance
+
+$ git push origin new-feature
+
+Create new Pull Request! Thanks!
 
 Contributing
 Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
