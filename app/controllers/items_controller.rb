@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
     end
     def create
         #binding.pry
-        if current_user.role_id == admin
+        if current_user.admin == true
             @item = Item.new(item_params)
             if @item.save 
             flash[:notice] = "item has been created."
@@ -62,6 +62,9 @@ private
             :title,:description,:image,:size,
             :URL,:image_cache, :remove_image,
             box_ids:[])
+    end
+    def current_user
+        @current_user= User.find_by_id(session[:user_id])
     end
 #As an administrator I want to be able to 
 # add a new item to a box"=>Admin::BoxItemsController#New;

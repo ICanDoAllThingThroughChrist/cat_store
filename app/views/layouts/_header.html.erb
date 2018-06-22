@@ -1,6 +1,8 @@
 <fieldset>
 <% #binding.pry %>
-    <%if session[:user_id] %>
+<%  @current_user= User.find_by_id(session[:user_id]) %>
+<%if session[:user_id]%>
+    <%if @current_user.admin == false %>
     <%@user= User.find_by_id(session[:user_id])%>
     <h4><%= @user.name %></h1>
     <h4>Email: <%= @user.email %></h2>
@@ -10,8 +12,10 @@
     <li><%= link_to "Purchase New Box", boxes_path %></li>
     <li><%= link_to "My list of boxes", boxes_path %></li>
     <li><%= link_to "Sign Out", logout_path %></li>
-    <%elsif logged_in? && current_user.role_id == 3 %>
+    <% binding.pry %>
+    <% elsif @current_user.admin == true %>
     <% #binding.pry %>
+     <%@user= User.find_by_id(session[:user_id])%>
     <h1><%= @user.name %></h1>
     <h2>Email: <%= @user.email %></h2>
     <h2>Facebook UID: <%= @user.uid %></h2>
@@ -23,11 +27,12 @@
     <li><%= link_to "Boxes Index to Ship Boxes", boxes_to_be_shipped_path%></li>
     <li><%= link_to "Add_New_Items to Box", new_item_path %></li>
     <li><%= link_to "Sign Out", logout_path %></li>
-    <%else %>
+    <% end %>
+<%else %>
         <h4> You are not logged in </h4>
         <li><%= link_to "Sign up", new_user_path %></li>
         <li><%= link_to "Log in", login_path %></li>
         <li><%= link_to "List of Subscriptions", subscriptions_path %></li>
         <li><%= link_to "New Subscription Order", new_order_path %></li>
-    <% end %>
+<% end %>
 </fieldset>

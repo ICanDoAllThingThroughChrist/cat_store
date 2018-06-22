@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   include SessionsHelper
   def current_user  
+    binding.pry
         @current_user= User.find_by_id(session[:user_id])
         @current_user= @user
     # elsif (user_id = cookies.signed[:user_id]) 

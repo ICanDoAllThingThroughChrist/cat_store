@@ -20,4 +20,9 @@ class AdminController < ApplicationController
     #Response:therefore, there is only 1 user per box)
     #box it adds it to the history("of the box") for all current 
     #subscribers - but not subscribers who have cancelled)
+    private 
+    def current_user
+      @current_user= User.find_by_id(session[:user_id])
+    end
+
 end
