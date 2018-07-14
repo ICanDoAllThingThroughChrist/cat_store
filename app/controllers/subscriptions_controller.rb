@@ -2,19 +2,16 @@ class SubscriptionsController < ApplicationController
     
         def index
             @subscriptions = Subscription.all
-            binding.pry
+            #binding.pry
         end
         def show 
             @subscription = Subscription.find(params[:id])
         end
         def new
-            #As a visitor I want to be able to 
-            #purchase a subscription
-            #just ask for first name, last name and email 
             @subscription = Subscription.new 
         end
         def create
-            binding.pry
+            #binding.pry
             @subscription = Subscription.create(subscription_params)
             if @subscription.save 
               flash[:notice] = "subscription has been created."
@@ -29,7 +26,7 @@ class SubscriptionsController < ApplicationController
             @subscription = Subscription.find(params[:id])
         end
         def update 
-            binding.pry
+            #binding.pry
             @subscription = Subscription.find(params[:id])
             if @subscription.update(subscription_params)
                 flash[:notice] = "subscription has been updated."

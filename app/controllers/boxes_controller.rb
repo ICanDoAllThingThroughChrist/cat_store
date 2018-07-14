@@ -1,5 +1,5 @@
 class BoxesController < ApplicationController
-    # include CurrentBox
+  
     include SessionsHelper
     before_action :admin, :only => [:create, :update]
    
@@ -18,34 +18,22 @@ class BoxesController < ApplicationController
     end
 
     def show
-        #/boxes/1/items should show all of the items 
-        #in box #1 to anyone who wants to see it 
-        #means no current_user
         @box = Box.find(params[:id])
         ##binding.pry
     end
 
     def new 
             @user = current_user
-            #@box = @user.boxes.build
-            #@box = set_box
-            #@user.boxes.build
             @box = @user.boxes.build
-            #authorize! :new, @box
+         
              3.times do
                 @box.items.build
             end
-            #@item = Item.all
+         
             @item = Item.group(:title)
     end
     def create 
-        #binding.pry
-        #boxes/1/items/new should allow an 
-        #administrator to add a new item to a box.
-        #=>before_action :admin, only => [:create]
         @item = Item.all
-        ##binding.pry
-        #because once again load_resource takes care of this for us.
         @box = Box.new(box_params) 
         @user = current_user
         @box.user_id= params[:box][:user_id]
@@ -57,28 +45,24 @@ class BoxesController < ApplicationController
                 @order2= @user.orders.last 
                 @order2.boxes.push @box
             end
-        #e.g. admin only! subscriber only needs to know where "see nav link"
+
         if admin
             if @box.save 
-                #@box.created_at = Time.now.strftime("%Y-%m-%d 00:00:00")
-                ##binding.pry
-                #@user = current_user
-                ##binding.pry
-                @user.subscriber= true #after_action assigns user to be a subscribe
+                @user.subscriber= true 
                 flash[:notice] = "Box has been created."
                 redirect_to @box 
             else
                 flash[:alert] = "Box has not been created."
                 render "new"
             end
-        else #e.g. is a visitor only!
+        else 
             flash[:alert] = "please sign up for subscription And log in as admin to create a box"
             redirect_to login_url
         end
     end
     def edit
        @box = Box.find(params[:id])
-        # authorize! :edit, @box
+
     end
     def update 
         if admin
@@ -102,7 +86,7 @@ class BoxesController < ApplicationController
         flash[:notice] = "box has been deleted."
         redirect_to root# to be determined
     end
-    #As a subscriber I want to see what boxes i received
+ 
     def boxes_received
         if current_user
             @user= current_user 
@@ -123,12 +107,6 @@ private
         @boxes = Box.accessible_by(current_ability).order('created_at DESC')
       end
     def box_params
-        #- As an administrator I want 
-        #to be able to create a new box 
-        #(subscription level, 
-        #month and year to uniquely identify it 
-        #and a title for the theme e.g. 
-        #“cat coolers for summer”)
         params.require(:box).permit(
         :shipped, :order_id,
         :user_id, :subscription_level,:month,

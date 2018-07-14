@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-  #skip_before_filter :authorize
-  #skip_authorization_check
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     ##binding.pry
@@ -33,7 +31,7 @@ class SessionsController < ApplicationController
           u.password_digest = auth['info']['password']
           u.id = auth['uid']
         end
-        binding.pry
+        #binding.pry
         @user.save
         session[:user_id]= @user.id
         session[:email]= @user.email
@@ -43,13 +41,7 @@ class SessionsController < ApplicationController
         log_in @user
         @user.activate
         render 'welcome/home'
-      binding.pry
-      #   # Load the cart from the session, or create a new empty cart.
-      #   cart = session[:cart] || []
-      #   cart << @item.id
- 
-      # # Save the cart in the session.
-      # session[:cart] = cart
+      #binding.pry
     else 
         redirect_to root_url
         binding.pry
@@ -65,7 +57,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id]= nil
-    binding.pry
+    #binding.pry
     redirect_to root_url
   end
 

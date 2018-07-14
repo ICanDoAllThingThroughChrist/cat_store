@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-  # resources :subscriber_boxes
 
   get 'admin' => 'admin#index'
   resources :subscriptions
-  # resources :users, only: [:show, :index] do 
-  resources :orders #:as => 'orders_of_subscription'
+ 
+  resources :orders
   get '/orders/:id' => 'orders#toggle_cancellation', :as => 'cancel_subscription'
   post '/orders/:id', to: 'orders#toggle_cancellation'
   get '/admin/manual_ship' => 'admin#manual_ship', :as => 'boxes_to_be_shipped'
@@ -14,7 +13,7 @@ Rails.application.routes.draw do
   resources :boxes do 
     resources :items 
   end
-  # devise_for :users
+ 
   get 'password_resets/new'
   get 'password_resets/edit'
   get '/login' => 'sessions#new', :as => 'login'
@@ -29,6 +28,4 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#google_create'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

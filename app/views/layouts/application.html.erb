@@ -13,10 +13,11 @@
       </title>
   </head>
   <body>
-  <fieldset>
-    <%= render file: "/Users/charlielee/Development/cat_store/app/views/layouts/_header" %>
-  <fieldset>
+    <fieldset>
+      <%= render file: "/Users/charlielee/Development/cat_store/app/views/layouts/_header" %>
+    <fieldset>
     <%= yield %>
+    <% #binding.pry %>
     <% flash.each do |key, message| %>
     <div><%= message %></div>
     <% end %>

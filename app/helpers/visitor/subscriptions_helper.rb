@@ -1,2 +1,0 @@
-module Visitor::SubscriptionsHelper
-end

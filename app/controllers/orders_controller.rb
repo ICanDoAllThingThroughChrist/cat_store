@@ -1,36 +1,28 @@
 class OrdersController < ApplicationController
         
         def index
-            binding.pry
+            #binding.pry
             if current_user
             #binding.pry
             @orders = Order.find_by_sql ["SELECT id FROM Orders WHERE user_id = ?", current_user]
             end
             @orders_ordered = Order.order(:id).paginate(page: params[:page], per_page: 5)
             #binding.pry
-            #@subscriber_users_boxes = Box.order(:id).paginate(page: params[:page], per_page: 1)
         end
 
         def new
-            binding.pry
-            #@current_user = User.find_by_id(session[:user_id])
+            #binding.pry
             @user = current_user
             @order = Order.new
             #binding.pry
         end
 
         def create
-            binding.pry
+            #binding.pry
             if current_user 
-                ##binding.pry
-                # @user = current_user
-                # @subscription= Subscription.find(params[:order][:subscription_id])
-                # @user.subscriptions.push @subscription
-                #binding.pry
                 @order = Order.new(order_params)
                 #binding.pry
                 @order.user_id= @current_user.id        
-                #@user.subscriptions.orders.push @order
                 ##binding.pry
                 if @order.save
                     #binding.pry
@@ -59,7 +51,6 @@ class OrdersController < ApplicationController
 
         def update 
             #binding.pry
-            #@current_user= User.find_by_id(session[:user_id])
             if current_user 
                 @order = Order.find(params[:id])
                 if @order.update(order_params)

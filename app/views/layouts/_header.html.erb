@@ -1,18 +1,16 @@
 <fieldset>
-<% #binding.pry %>
+<%#binding.pry %>
 <%  @current_user= User.find_by_id(session[:user_id]) %>
 <%if session[:user_id]%>
-    <%if @current_user.admin == false %>
-    <%@user= User.find_by_id(session[:user_id])%>
-    <h4><%= @user.name %></h1>
-    <h4>Email: <%= @user.email %></h2>
-    <h4>Facebook UID: <%= @user.uid %></h2>
-    <li><%= link_to "Purchase New Subscription", subscriptions_path%></li>
-    <li><%= link_to "My Subscription Orders", orders_path %></li>
-    <li><%= link_to "Purchase New Box", boxes_path %></li>
-    <li><%= link_to "My list of boxes", boxes_path %></li>
-    <li><%= link_to "Sign Out", logout_path %></li>
-    <% binding.pry %>
+<% #binding.pry %>
+    <%if @current_user %>
+    <% #binding.pry %>
+    <li><%= link_to "Step 1: View List of Subscription for Purchase", subscriptions_path%></li>
+    <li><%= link_to "Step 2: View My Subscription Orders", orders_path %></li>
+    <li><%= link_to "Step 3: Purchase New Box in a Subscription Order", boxes_path %></li>
+    <li><%= link_to "Step 4: View My List of Boxes", boxes_path %></li>
+    <li><%= link_to "Step 5: Sign Out", logout_path %></li>
+    <% #binding.pry %>
     <% elsif @current_user.admin == true %>
     <% #binding.pry %>
      <%@user= User.find_by_id(session[:user_id])%>

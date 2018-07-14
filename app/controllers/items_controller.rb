@@ -1,16 +1,11 @@
 class ItemsController < ApplicationController
     include SessionsHelper
-    # before_action :admin, only => [:new, :create]
-    # load_and_authorize_resource :nested => :box
     def index
         @items = Item.all
     end
     def new
             @user= current_user
-            #@boxes= @user.boxes.pluck(:title, :id)
             @boxes= Box.pluck(:title, :id)
-            #@boxex= Box.group(:title).pluck(:title, :id)
-            #@boxes= Box.group(:title).where(:shipped == "false")
             @item = Item.new
         #https://stackoverflow.com/questions/48285481/how-do-you-use-a-single-select-dropdown-with-rails-has-many-through-association
     end
@@ -66,8 +61,4 @@ private
     def current_user
         @current_user= User.find_by_id(session[:user_id])
     end
-#As an administrator I want to be able to 
-# add a new item to a box"=>Admin::BoxItemsController#New;
-#Create" (title, description, image, size, URL to buy 
-# more from amazon or other partners)
 end

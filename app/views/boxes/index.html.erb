@@ -9,7 +9,7 @@
                 <p>User ID: <%= user_id %>
                 <p>Order ID:<%=link_to "#{order_id}", order_path(order_id) %></p>
                 <p>Box ID:<%= link_to "#{user_box_id}", box_path(user_box_id) %> </p>
-                <% binding.pry %>
+                <% #binding.pry %>
                 <p>Title: <%=link_to "#{user_box.title}", box_path(user_box) %></p>
         </fieldset>
         <% end %>
