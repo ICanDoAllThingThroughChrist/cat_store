@@ -12,7 +12,7 @@ class SubscriptionsController < ApplicationController
         end
         def create
             #binding.pry
-            @subscription = Subscription.create(subscription_params)
+            @subscription = Subscription.new(subscription_params)#use new instead of create to prevent data persistence
             if @subscription.save 
               flash[:notice] = "subscription has been created."
               redirect_to @subscription 

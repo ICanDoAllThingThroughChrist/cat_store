@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    include SessionsHelper
 # you can also explicitly define enum as:  enum access_level: [:employee => 0, :company_admin => 1, :super_admin => 2}
     enum access_level: [:visitor, :subscriber, :admin]
     attr_accessor :remember_token, :activation_token, :reset_token
@@ -9,23 +10,17 @@ class User < ApplicationRecord
     #validates :email, presence: true, length: { maximum: 255 },
                     # format: { with: VALID_EMAIL_REGEX },
                     # uniqueness: { case_sensitive: false }
-    has_secure_password
-    #validates :password, presence: true, length: { minimum: 6 }
+    #has_secure_password # commented out for facebook login feature
+    #validates :password, length: {minimum: 6}, allow_blank: true #commented out for facebook login feature
+    #https://stackoverflow.com/questions/44899255/rails-password-cant-be-blank-with-has-secure-password
+    #https://stackoverflow.com/questions/17116696/password-cant-be-blank-displayed-twice
     has_many :orders
     has_many :subscriptions, through: :orders
     has_many :boxes 
     has_many :orders_of_boxes, :through => :boxes, :source => :subscriber_boxes
-    #belongs_to :role
-    #user.url = auth_hash['info']['urls'][user.provider.capitalize]
-    #  def role_name=(name)
-    #      self.role= Role.find_by(name: name)
-    #      binding.pry
-    #  end 
+    
+    #scope :most_boxes, -> { where(boxes: true) }
 
-    #  def self.role_name 
-    #      self.role.name
-    #      binding.pry  
-    #  end 
     def create_current_box 
         new_box = boxes.create 
         self.current_cart_id = new_cart.id 
@@ -100,5 +95,4 @@ class User < ApplicationRecord
         self.activation_digest = User.digest(activation_token)
     end 
 
-    
 end

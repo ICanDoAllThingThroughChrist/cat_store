@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get '/auth/facebook/callback' => 'sessions#facebook'
 
   resources :users
+  get '/users/:id/box_count' => 'users#box_count', :as => 'box_count'
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :account_activations, only: [:edit]
   get 'auth/:provider/callback', to: 'sessions#google_create'

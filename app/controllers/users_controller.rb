@@ -3,6 +3,8 @@ class UsersController < ApplicationController
     before_action :correct_user, only: [:edit, :update]
     #before_action :set_subscription
     before_action :admin_user, only: :destroy
+    wrap_parameters :user, include: [:name, :password, :password_confirmation]
+    #https://stackoverflow.com/questions/30632639/password-cant-be-blank-in-rails-using-has-secure-password
     #https://stackoverflow.com/questions/23585871/implementing-multiple-user-roles
     def index 
         @users = User.order(:last_name)
@@ -52,6 +54,15 @@ class UsersController < ApplicationController
         flash[:notice] = "Reset passwordpassword instructions have been sent to #{user.email}." 
         redirect_to admin_user_path(user)
     end
+
+    def box_count 
+        @current_user= User.find_by_id(session[:user_id])
+        @user= User.new
+        @user= @current_user
+        binding.pry
+        @number_of_boxes= @current_user.boxes.count
+        binding.pry
+    end 
 
     private 
     def user_params 
