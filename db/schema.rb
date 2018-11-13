@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 20180616031600) do
     t.integer "role_id"
     t.string "access_level"
     t.string "provider"
-    t.integer "uid", limit: 7
+    t.integer "uid", limit: 8
     t.string "name"
     t.string "oauth_token"
     t.datetime "oauth_expires_at"

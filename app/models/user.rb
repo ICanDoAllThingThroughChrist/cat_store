@@ -10,7 +10,7 @@ class User < ApplicationRecord
     #validates :email, presence: true, length: { maximum: 255 },
                     # format: { with: VALID_EMAIL_REGEX },
                     # uniqueness: { case_sensitive: false }
-    #has_secure_password #Michael Hartl Rails Tutorial 
+    has_secure_password #Michael Hartl Rails Tutorial 
     #   commented out for facebook login feature, but this leads to 
     #   but its virtual attribute, password, method becomes unavailble during 
     #   signup process
