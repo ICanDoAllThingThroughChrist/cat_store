@@ -6,7 +6,11 @@ class Box < ApplicationRecord
     belongs_to :user 
     belongs_to :order, touch: true
     scope :boxes_received, -> {where(received: true)}
- 
+    
+    def self.user_order_boxes_yesterday
+        time_range = (Time.now.midnight - 2.day)..Time.now.midnight
+        User.joins(:boxes).where(boxes: { created_at: time_range })
+    end
     def add_item(item_id)
         box_item = self.box_items.find_by(item_id: item_id)
         if box_item 

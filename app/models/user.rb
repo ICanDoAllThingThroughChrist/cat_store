@@ -10,7 +10,10 @@ class User < ApplicationRecord
     #validates :email, presence: true, length: { maximum: 255 },
                     # format: { with: VALID_EMAIL_REGEX },
                     # uniqueness: { case_sensitive: false }
-    #has_secure_password # commented out for facebook login feature
+    #has_secure_password #Michael Hartl Rails Tutorial 
+    #   commented out for facebook login feature, but this leads to 
+    #   but its virtual attribute, password, method becomes unavailble during 
+    #   signup process
     #validates :password, length: {minimum: 6}, allow_blank: true #commented out for facebook login feature
     #https://stackoverflow.com/questions/44899255/rails-password-cant-be-blank-with-has-secure-password
     #https://stackoverflow.com/questions/17116696/password-cant-be-blank-displayed-twice

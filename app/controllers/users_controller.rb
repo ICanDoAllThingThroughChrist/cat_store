@@ -67,7 +67,7 @@ class UsersController < ApplicationController
     private 
     def user_params 
         params.require(:user).permit(:first_name, :last_name, :email, :password,
-                                     :password_confirmation, :role_id)
+                                     :password_confirmation, :role_id, :)
     end 
     def logged_in_user
         unless logged_in?
